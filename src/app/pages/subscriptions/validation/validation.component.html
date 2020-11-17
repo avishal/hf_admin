@@ -34,8 +34,9 @@
             <div class="form-group">
               <label>Description</label>
               <div>
-                <textarea formControlName="description" class="form-control" rows="5"
-                  [ngClass]="{'is-invalid': typesubmit && type.description.errors}"></textarea>
+                <ckeditor [editor]="Editor" data="" formControlName="description"></ckeditor>
+                <!-- <textarea formControlName="description" class="form-control" rows="5"
+                  [ngClass]="{'is-invalid': typesubmit && type.description.errors}"></textarea> -->
                 <div *ngIf="typesubmit && type.description.errors" class="invalid-feedback">
                   <span *ngIf="type.description.errors.required">This value is required.</span>
                 </div>

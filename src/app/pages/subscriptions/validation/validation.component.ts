@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { SubscriptionService } from '../subscription.service';
 import { MustMatch } from './validation.mustmatch';
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
   selector: 'app-validation',
@@ -23,7 +24,7 @@ export class ValidationComponent implements OnInit {
     public spservice:SubscriptionService) { }
   // bread crumb items
   breadCrumbItems: Array<{}>;
-
+  public Editor = ClassicEditor;
   // Form submition
   submit: boolean;
   formsubmit: boolean;
