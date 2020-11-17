@@ -1,0 +1,5 @@
+const tableData = [
+  
+];
+
+export { tableData };
