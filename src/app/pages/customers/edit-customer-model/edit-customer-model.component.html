@@ -1,0 +1,54 @@
+<div class="modal-header">
+  <h5 class="modal-title mt-0">Modal Heading</h5>
+  <button type="button" class="close" aria-hidden="true" (click)="closeModal(0)">×</button>
+</div>
+<div class="modal-body">
+<form (ngSubmit)="submit()" [formGroup]="typeValidationForm">
+  <div class="form-group">
+    <label>Name</label>
+    <input type="text" class="form-control" formControlName="name"
+      [ngClass]="{'is-invalid': typesubmit && type.name.errors}" placeholder="Enter name" />
+    <div *ngIf="typesubmit && type.name.errors" class="invalid-feedback">
+      <span *ngIf="type.name.errors.required">This value is required.</span>
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Email</label>
+    <input type="text" class="form-control" formControlName="email"
+      [ngClass]="{'is-invalid': typesubmit && type.email.errors}" placeholder="Enter email" />
+    <div *ngIf="typesubmit && type.email.errors" class="invalid-feedback">
+      <span *ngIf="type.email.errors.required">This value is required.</span>
+      <span *ngIf="type.email.errors.pattern">This value is valid email.</span>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label>Phone</label>
+    <input type="text" class="form-control" formControlName="phone"
+      [ngClass]="{'is-invalid': typesubmit && type.phone.errors}" placeholder="Enter phone number" />
+    <div *ngIf="typesubmit && type.phone.errors" class="invalid-feedback">
+      <span *ngIf="type.phone.errors.required">This value is required.</span>
+      <span *ngIf="type.phone.errors.pattern">This value should be number.</span>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label>Active Status</label>
+    <div class="custom-control custom-checkbox mb-3">
+      <!-- <input type="checkbox" formControlName="active_status" class="form-control" id="customCheck1" checked [ngClass]="{'is-invalid': typesubmit && type.active_status.errors}" > -->
+      <select formControlName="active_status" class="form-control" [ngClass]="{'is-invalid': typesubmit && type.active_status.errors}">
+        <option value="">Select Active Status</option>
+        <option value="1">Active</option>
+        <option value="0">Inactive</option>
+      </select>
+    </div>
+    <div *ngIf="typesubmit && type.active_status.errors" class="invalid-feedback">
+      <span *ngIf="type.active_status.errors.required">This value is required.</span>
+    </div>
+  </div>  
+</form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-light" (click)="closeModal(0)">Close</button>
+  <button type="button" class="btn btn-primary" (click)="submit()">Save changes</button>
+</div>

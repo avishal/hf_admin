@@ -249,6 +249,18 @@
         "ADVANCED": "Create New Plan"
       }
     },
+    "CUSTOMERS": {
+      "TEXT": "Customers",
+      "LIST": {
+        "BASIC": "All Customers"
+      }
+    },
+    "ORDERS": {
+      "TEXT": "Customers Orders",
+      "LIST": {
+        "BASIC": "All Orders"
+      }
+    },
     "CHARTS": {
       "TEXT": "Charts",
       "LIST": {
