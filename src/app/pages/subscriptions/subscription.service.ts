@@ -32,4 +32,10 @@ export class SubscriptionService {
     postSP(data) {
         return this.http.post<any>(environment.api_base_url+`/api/sp`, data);
     }
+    postUpdateSP(id, data) {
+        return this.http.post<any>(environment.api_base_url+`/api/sp-update/${id}`, data);
+    }
+    postDeleteSP(id) {
+        return this.http.post<any>(environment.api_base_url+`/api/sp-delete/${id}`, null);
+    }
 }

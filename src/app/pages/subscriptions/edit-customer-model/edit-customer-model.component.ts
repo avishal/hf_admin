@@ -2,7 +2,9 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { from } from 'rxjs';
-import {CustomerService} from '../customer.service';
+import {SubscriptionService} from '../subscription.service';
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
 @Component({
   selector: 'app-edit-customer-model',
   templateUrl: './edit-customer-model.component.html',
@@ -17,8 +19,9 @@ export class EditCustomerModelComponent implements OnInit {
   breadCrumbItems: Array<{}>;
   sps = {};
   id;
+  public Editor = ClassicEditor;
   constructor(public formBuilder: FormBuilder, 
-    private spservice:CustomerService,public activeModal: NgbActiveModal) { }
+    private spservice:SubscriptionService,public activeModal: NgbActiveModal) { }
   typeValidationForm: FormGroup; // type validation form
   typesubmit: boolean;
   // @Output() passEntry: EventEmitter<any> = new EventEmitter();
@@ -30,40 +33,46 @@ export class EditCustomerModelComponent implements OnInit {
   ngOnInit() {
     
     this.typeValidationForm = this.formBuilder.group({
-      name: ['basic', [Validators.required]],
-      email: ['',[Validators.required,Validators.email]],
-      phone: ['', [Validators.required,Validators.pattern('[0-9]+')]],
-      active_status: ['1', [Validators.required]],
+      title: ['', [Validators.required]],
+      subtitle: [''],
+      description: ['', [Validators.required]],
+      price: ['', [Validators.required, Validators.pattern('[0-9]+')]],
+      discount: ['', [Validators.required, Validators.pattern('[0-9]+')]],
+      duration: ['', [Validators.required, Validators.pattern('[0-9]+')]],
+      active_status: ['', [Validators.required]],
     });
 
-    this.breadCrumbItems = [{ label: 'Customers' }, { label: 'All Customers', active: true }];
+    this.breadCrumbItems = [{ label: 'Subscription Plan' }, { label: 'All Plans', active: true }];
     
     this.typesubmit = false;
 
-    this.getCustomer();
+    this.getSP();
   }
 
-  getCustomer()
+  getSP()
   {
     this.loading = true;
     this.error = false;
     this.errorMessage = "";
-    this.spservice.getCustomer(this.id).subscribe( resp => {
+    this.spservice.getSP(this.id).subscribe( resp => {
 
       this.loading = false;
       this.error = false;
       this.errorMessage = ""
 
       this.customerData = resp.data;
-      this.type.name.setValue(this.customerData.name)
-      this.type.email.setValue(this.customerData.email)
-      this.type.phone.setValue(this.customerData.phone)
+      this.type.title.setValue(this.customerData.title)
+      this.type.subtitle.setValue(this.customerData.sub_title)
+      this.type.description.setValue(this.customerData.description)
+      this.type.price.setValue(this.customerData.price)
+      this.type.discount.setValue(this.customerData.discount)
+      this.type.duration.setValue(this.customerData.duration)
       this.type.active_status.setValue(this.customerData.active_status)
       
     }, err=>{ 
       this.loading = false;
       this.error = true;
-      this.errorMessage = "Something went wrong. Unable to get customer";
+      this.errorMessage = "Something went wrong. Unable to get subscription plan";
       console.log("err", err)
     });
 
@@ -84,13 +93,16 @@ export class EditCustomerModelComponent implements OnInit {
     this.errorMessage = "";
 
     let data = {
-      name: this.type.name.value,
-      email: this.type.email.value,
-      phone: this.type.phone.value,
+      title: this.type.title.value,
+      subtitle: this.type.subtitle.value,
+      description: this.type.description.value,
+      price: this.type.price.value,
+      discount: this.type.discount.value,
+      duration: this.type.duration.value,
       active_status: this.type.active_status.value
     }
     
-    this.spservice.postUpdateCustomer(this.id, data).subscribe( resp => {
+    this.spservice.postUpdateSP(this.id, data).subscribe( resp => {
       
       this.loading = false;
       this.error = false;

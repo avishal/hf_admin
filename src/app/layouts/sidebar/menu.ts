@@ -6,7 +6,7 @@ export const MENU: MenuItem[] = [
         label: 'MENUITEMS.MENU.TEXT',
         isTitle: true
     },
-    {
+    /*{
         id: 2,
         label: 'MENUITEMS.DASHBOARDS.TEXT',
         icon: 'bx-home-circle',
@@ -549,7 +549,7 @@ export const MENU: MenuItem[] = [
                 parentId: 88
             }
         ]
-    },
+    },*/
     {
         id: 1010,
         icon: 'bx-list-ul',
@@ -577,18 +577,50 @@ export const MENU: MenuItem[] = [
             {
                 id: 89,
                 label: 'MENUITEMS.SUBSCRIPTIONS.LIST.BASIC',
-                link: '/subscriptions/plans',
+                link: '/subscriptions',
                 parentId: 88
             },
             {
                 id: 1011,
                 label: 'MENUITEMS.SUBSCRIPTIONS.LIST.ADVANCED',
-                link: '/subscriptions/validation',
+                link: '/subscriptions/create-new',
                 parentId: 1010
             }
         ]
     },
     {
+        id: 1010,
+        icon: 'bx-list-ul',
+        label: 'MENUITEMS.CUSTOMERS.TEXT',
+        subItems: [
+            {
+                id: 89,
+                label: 'MENUITEMS.CUSTOMERS.LIST.BASIC',
+                link: '/customers',
+                parentId: 88
+            },
+        ]
+    },
+    {
+        id: 1010,
+        icon: 'bx-list-ul',
+        label: 'MENUITEMS.WORKOUT.TEXT',
+        subItems: [
+            {
+                id: 89,
+                label: 'MENUITEMS.WORKOUT.LIST.BASIC',
+                link: '/workout',
+                parentId: 88
+            },
+            {
+                id: 89,
+                label: 'MENUITEMS.WORKOUT.LIST.CREATENEW',
+                link: '/workout/create-new',
+                parentId: 88
+            },
+        ]
+    },
+    /*{
         id: 91,
         icon: 'bxs-bar-chart-alt-2',
         label: 'MENUITEMS.CHARTS.TEXT',
@@ -694,6 +726,6 @@ export const MENU: MenuItem[] = [
                 ]
             },
         ]
-    }
+    }*/
 ];
 

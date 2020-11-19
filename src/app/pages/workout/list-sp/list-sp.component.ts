@@ -23,7 +23,7 @@ export class ListSpComponent implements OnInit {
 
   ngOnInit() {
     this.breadCrumbItems = [{ label: 'Customers' }, { label: 'All Customers', active: true }];
-    this.spservice.getAllSP().subscribe(resp => {
+    this.spservice.getAllWP().subscribe(resp => {
       console.log(resp);
       this.sps = resp.data
     })
@@ -56,8 +56,8 @@ export class ListSpComponent implements OnInit {
       confirmButtonText: 'Yes, delete it!'
     }).then(result => {
       if (result.value) {
-        this.spservice.postDeleteCustomer(id).subscribe( resp => {
-          Swal.fire('Deleted!', 'Customer has been deleted.', 'success');
+        this.spservice.postDeleteWorkout(id).subscribe( resp => {
+          Swal.fire('Deleted!', 'Workout has been deleted.', 'success');
         }, err=>{ 
           console.log("err", err)
         });

@@ -1,0 +1,117 @@
+<div class="container-fluid">
+
+  <!-- start page title -->
+  <app-page-title title="Form Validation" [breadcrumbItems]="breadCrumbItems"></app-page-title>
+  <!-- end page title -->
+
+
+
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Create Workout</h4>
+          <p class="card-title-desc">
+            Create new workout plan
+          </p>
+          <form (ngSubmit)="typeSubmit()" [formGroup]="typeValidationForm">
+            <div class="form-group">
+              <label>Title</label>
+              <input type="text" class="form-control" formControlName="title"
+                [ngClass]="{'is-invalid': typesubmit && type.title.errors}" placeholder="Enter plan title" />
+              <div *ngIf="typesubmit && type.title.errors" class="invalid-feedback">
+                <span *ngIf="type.title.errors.required">This value is required.</span>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label>Description</label>
+              <div>
+                <ckeditor [editor]="Editor" data="" formControlName="description"></ckeditor>
+                <!-- <textarea formControlName="description" class="form-control" rows="5"
+                  [ngClass]="{'is-invalid': typesubmit && type.description.errors}"></textarea> -->
+                <div *ngIf="typesubmit && type.description.errors" class="invalid-feedback">
+                  <span *ngIf="type.description.errors.required">This value is required.</span>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Image Upload</label>
+              <img class="img-thumbnail" alt="200x200" width="200" src="{{imgURL}}" data-holder-rendered="true">
+              <div class="custom-file">
+                <input type="file" formControlName="image" #file (change)="handleFileInput($event.target.files)" id="customFile" class="custom-file-input">
+                <label for="customFile" class="custom-file-label">Choose image</label>
+              </div>
+              <div *ngIf="typesubmit && type.image.errors" class="invalid-feedback">
+                <span *ngIf="type.image.errors.required">This value is required.</span>
+              </div>
+          </div>
+            <div class="form-group">
+              <label>Level</label>
+              <select formControlName="level" class="form-control" [ngClass]="{'is-invalid': typesubmit && type.level.errors}">
+                <option value="">Select level</option>
+                <option value="1">Level 1</option>
+                <option value="2">Level 2</option>
+                <option value="3">Level 3</option>
+                <option value="4">Level 4</option>
+              </select>
+
+              <div *ngIf="typesubmit && type.level.errors" class="invalid-feedback">
+                <span *ngIf="type.level.errors.required">This value is required.</span>
+                <span *ngIf="type.level.errors.pattern">This value should be number.</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Focus Area</label>
+              <input type="text" class="form-control" formControlName="focus_area"
+                [ngClass]="{'is-invalid': typesubmit && type.focus_area.errors}" placeholder="Enter focus area" />
+              <div *ngIf="typesubmit && type.focus_area.errors" class="invalid-feedback">
+                <span *ngIf="type.focus_area.errors.required">This value is required.</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Duration</label>
+              <input type="text" class="form-control" formControlName="duration"
+                [ngClass]="{'is-invalid': typesubmit && type.duration.errors}" placeholder="Enter duration (in mins)" />
+              <div *ngIf="typesubmit && type.duration.errors" class="invalid-feedback">
+                <span *ngIf="type.duration.errors.required">This value is required.</span>
+                <span *ngIf="type.duration.errors.pattern">This value should be number.</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Calories</label>
+              <input type="text" class="form-control" formControlName="calories"
+                [ngClass]="{'is-invalid': typesubmit && type.calories.errors}" placeholder="Enter calories (in mins)" />
+              <div *ngIf="typesubmit && type.calories.errors" class="invalid-feedback">
+                <span *ngIf="type.calories.errors.required">This value is required.</span>
+                <span *ngIf="type.calories.errors.pattern">This value should be number.</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Active Status</label>
+              <select formControlName="active_status" class="form-control" [ngClass]="{'is-invalid': typesubmit && type.active_status.errors}">
+                <option value="">Select Active Status</option>
+                <option value="1">Active</option>
+                <option value="0">Inactive</option>
+              </select>
+              <div *ngIf="typesubmit && type.active_status.errors" class="invalid-feedback">
+                <span *ngIf="type.active_status.errors.required">This value is required.</span>
+              </div>
+            </div>
+            
+            <div class="form-group mb-0">
+              <div>
+                <button type="submit" class="btn btn-primary mr-1">
+                  Submit
+                </button>
+                <button type="reset" class="btn btn-secondary">
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

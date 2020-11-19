@@ -30,6 +30,7 @@ import { UiModule } from './ui/ui.module';
 import { FormModule } from './form/form.module';
 import { SubscriptionsModule } from './subscriptions/subscriptions.module';
 import { CustomersModule } from './customers/customers.module';
+import { WorkoutModule } from './workout/workout.module';
 import { TablesModule } from './tables/tables.module';
 import { CitiesModule } from './cities/cities.module';
 import { IconsModule } from './icons/icons.module';
@@ -70,6 +71,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     FormModule,
     SubscriptionsModule,
     CustomersModule,
+    WorkoutModule,
     TablesModule,
     CitiesModule,
     IconsModule,

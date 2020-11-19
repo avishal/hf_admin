@@ -255,6 +255,20 @@
         "BASIC": "All Customers"
       }
     },
+    "WORKOUT": {
+      "TEXT": "Workout",
+      "LIST": {
+        "BASIC": "All Workout",
+        "CREATENEW": "Create new Workout"
+      }
+    },
+    "EXERCISE": {
+      "TEXT": "Exercise",
+      "LIST": {
+        "BASIC": "All Exercise",
+        "CREATENEW": "Create new Exercise"
+      }
+    },
     "ORDERS": {
       "TEXT": "Customers Orders",
       "LIST": {

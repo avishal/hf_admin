@@ -26,7 +26,7 @@ export class CustomerService {
     getAllSP() {
         return this.http.get<any>(environment.api_base_url+`/api/customers`);
     }
-    getSP(id) {
+    getCustomer(id) {
         return this.http.get<any>(environment.api_base_url+`/api/customer/${id}`);
     }
     postSP(data) {

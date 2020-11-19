@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RepeaterComponent } from './repeater.component';
+import { ValidationComponent } from './validation.component';
 
-describe('RepeaterComponent', () => {
-  let component: RepeaterComponent;
-  let fixture: ComponentFixture<RepeaterComponent>;
+describe('ValidationComponent', () => {
+  let component: ValidationComponent;
+  let fixture: ComponentFixture<ValidationComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RepeaterComponent ]
+      declarations: [ ValidationComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RepeaterComponent);
+    fixture = TestBed.createComponent(ValidationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

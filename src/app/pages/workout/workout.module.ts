@@ -14,13 +14,13 @@ import { DropzoneModule } from 'ngx-dropzone-wrapper';
 import { UIModule } from '../../shared/ui/ui.module';
 import { FormRoutingModule } from './form-routing.module';
 import { ValidationComponent } from './validation/validation.component';
-import { SubscriptionService } from './subscription.service';
 import { ListSpComponent } from './list-sp/list-sp.component';
 import { EditCustomerModelComponent } from './edit-customer-model/edit-customer-model.component';
+import { CustomerService } from './customer.service';
 
 @NgModule({
   // tslint:disable-next-line: max-line-length
-  declarations: [EditCustomerModelComponent,ListSpComponent ,ValidationComponent],
+  declarations: [ListSpComponent ,ValidationComponent,EditCustomerModelComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -36,6 +36,6 @@ import { EditCustomerModelComponent } from './edit-customer-model/edit-customer-
     NgbDatepickerModule,
     DropzoneModule
   ],
-  providers: [SubscriptionService, DecimalPipe]
+  providers: [CustomerService, DecimalPipe]
 })
-export class SubscriptionsModule { }
+export class WorkoutModule { }

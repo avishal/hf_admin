@@ -17,11 +17,12 @@
                   <th>#</th>
                   <th>Title</th>
                   <th>Sub title</th>
-                  <th>Description</th>
+                  <!-- <th>Description</th> -->
                   <th>Price</th>
                   <th>Discount</th>
                   <th>Duration</th>
                   <th>Active Status</th>
+                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -29,13 +30,14 @@
                   <th scope="row">{{i + 1}}</th>
                   <td>{{sp.title}}</td>
                   <td>{{sp.sub_title}}</td>
-                  <td>{{sp.description}}</td>
+                  <!-- <td>{{sp.description}}</td> -->
                   <td>{{sp.price | currency: 'INR'}}</td>
                   <td>{{sp.discount}}</td>
                   <td>{{sp.duration}} days</td>
                   <td><span *ngIf="sp.active_status" class="badge badge-success">Active</span>
                     <span *ngIf="sp.active_status != 1" class="badge badge-danger ml-1">Inactive</span></td>
-                </tr>
+                  <td> <a [routerLink]="" (click)="edit(sp.id)">Edit</a> | <a [routerLink]="" (click)="delete(sp.id)">Delete</a></td>
+                  </tr>
                 
               </tbody>
             </table>

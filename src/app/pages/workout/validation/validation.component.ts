@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { SubscriptionService } from '../subscription.service';
+import { CustomerService } from '../customer.service';
 import { MustMatch } from './validation.mustmatch';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
@@ -18,7 +18,7 @@ export class ValidationComponent implements OnInit {
   typeValidationForm: FormGroup; // type validation form
 
   constructor(public formBuilder: FormBuilder,
-    public spservice:SubscriptionService) { }
+    public spservice:CustomerService) { }
   // bread crumb items
   breadCrumbItems: Array<{}>;
   public Editor = ClassicEditor;
@@ -27,27 +27,27 @@ export class ValidationComponent implements OnInit {
 
   ngOnInit() {
 
-    this.breadCrumbItems = [{ label: 'Subscriptions' }, { label: 'Create new', active: true }];
+    this.breadCrumbItems = [{ label: 'Forms' }, { label: 'Form Validation', active: true }];
 
-    
 
     /**
      * Type validation form
      */
     this.typeValidationForm = this.formBuilder.group({
-      title: ['basic', [Validators.required]],
-      subtitle: [''],
-      description: ['abc', [Validators.required]],
-      price: ['100', [Validators.required, Validators.pattern('[0-9]+')]],
-      discount: ['0', [Validators.required, Validators.pattern('[0-9]+')]],
-      duration: ['10', [Validators.required, Validators.pattern('[0-9]+')]],
+      title: ['', [Validators.required]],
+      description: ['',[Validators.required]],
+      level: ['',[Validators.required]],
+      focus_area: ['', [Validators.required]],
+      duration: ['', [Validators.required, Validators.pattern('[0-9]+')]],
       active_status: ['1', [Validators.required]],
+      image: ['', Validators.required],
+      calories: [''],
     });
 
 
     this.typesubmit = false;
-  }
 
+  }
 
   /**
    * Returns the type validation form
@@ -56,32 +56,49 @@ export class ValidationComponent implements OnInit {
     return this.typeValidationForm.controls;
   }
 
+  fileToUpload
+  imagePath
+  imgURL
+  handleFileInput(files: FileList) {
+    this.fileToUpload = files.item(0);
+    console.log(this.fileToUpload);
+
+    var reader = new FileReader();
+    this.imagePath = files;
+    reader.readAsDataURL(files[0]); 
+    reader.onload = (_event) => { 
+      this.imgURL = reader.result; 
+    }
+
+  }
+
   /**
    * Type validation form submit data
    */
   typeSubmit() {
     this.typesubmit = true;
-    let data = {
-
-      title: this.type.title.value,
-      subtitle: this.type.subtitle.value,
-      description: this.type.description.value,
-      price: this.type.price.value,
-      discount: this.type.discount.value,
-      duration: this.type.duration.value,
-      active_status: this.type.active_status.value,
-
-    }
     
+
     if(this.typeValidationForm.invalid)
     {
       return;
     }
 
-    this.spservice.postSP(data).subscribe( resp => {
-      console.log("resp", resp)
-    }, err=>{ 
-      console.log("err", err)});
+    let data = {
+      title: this.type.title.value,
+      description: this.type.description.value,
+      level: this.type.level.value,
+      focus_area: this.type.focus_area.value,
+      duration: this.type.duration.value,
+      calories: this.type.calories.value,
+      active_status: this.type.active_status.value,
     }
 
+    this.spservice.postWorkout(this.fileToUpload, data).subscribe( resp => {
+      console.log("resp", resp)
+    }, err=>{ 
+      console.log("err", err)
+    });
+  }
+    
 }

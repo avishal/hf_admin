@@ -1,0 +1,77 @@
+<div class="modal-header">
+  <h5 class="modal-title mt-0">Edit Subscription Plan</h5>
+  <button type="button" class="close" aria-hidden="true" (click)="closeModal(0)">×</button>
+</div>
+<div class="modal-body">
+  <form (ngSubmit)="submit()" [formGroup]="typeValidationForm">
+    <div class="form-group">
+      <label>Title</label>
+      <input type="text" class="form-control" formControlName="title"
+        [ngClass]="{'is-invalid': typesubmit && type.title.errors}" placeholder="Enter plan title" />
+      <div *ngIf="typesubmit && type.title.errors" class="invalid-feedback">
+        <span *ngIf="type.title.errors.required">This value is required.</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Sub Title</label>
+      <input type="text" class="form-control" formControlName="subtitle"
+        [ngClass]="{'is-invalid': typesubmit && type.subtitle.errors}" placeholder="Enter plan sub-title" />
+      <div *ngIf="typesubmit && type.subtitle.errors" class="invalid-feedback">
+        <span *ngIf="type.subtitle.errors.required">This value is required.</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Description</label>
+      <div>
+        <ckeditor [editor]="Editor" data="" formControlName="description"></ckeditor>
+        <!-- <textarea formControlName="description" class="form-control" rows="5"
+          [ngClass]="{'is-invalid': typesubmit && type.description.errors}"></textarea> -->
+        <div *ngIf="typesubmit && type.description.errors" class="invalid-feedback">
+          <span *ngIf="type.description.errors.required">This value is required.</span>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Price</label>
+      <input type="text" class="form-control" formControlName="price"
+        [ngClass]="{'is-invalid': typesubmit && type.price.errors}" placeholder="Enter plan cost" />
+      <div *ngIf="typesubmit && type.price.errors" class="invalid-feedback">
+        <span *ngIf="type.price.errors.required">This value is required.</span>
+        <span *ngIf="type.price.errors.pattern">This value should be number.</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Discount</label>
+      <input type="text" class="form-control" formControlName="discount"
+        [ngClass]="{'is-invalid': typesubmit && type.discount.errors}" placeholder="Enter discount amount" />
+      <div *ngIf="typesubmit && type.discount.errors" class="invalid-feedback">
+        <span *ngIf="type.discount.errors.required">This value is required.</span>
+        <span *ngIf="type.discount.errors.pattern">This value should be number.</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Duration</label>
+      <input type="text" class="form-control" formControlName="duration"
+        [ngClass]="{'is-invalid': typesubmit && type.duration.errors}" placeholder="Enter plan duration (in days)" />
+      <div *ngIf="typesubmit && type.duration.errors" class="invalid-feedback">
+        <span *ngIf="type.duration.errors.required">This value is required.</span>
+        <span *ngIf="type.duration.errors.pattern">This value should be number.</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Active Status</label>
+      <div class="custom-control custom-checkbox mb-3">
+        <input type="checkbox" formControlName="active_status" class="custom-control-input" id="customCheck1" checked [ngClass]="{'is-invalid': typesubmit && type.active_status.errors}" >
+        <label class="custom-control-label" for="customCheck1">Active/Inactive</label>
+      </div>
+      <div *ngIf="typesubmit && type.active_status.errors" class="invalid-feedback">
+        <span *ngIf="type.active_status.errors.required">This value is required.</span>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-light" (click)="closeModal(0)">Close</button>
+  <button type="button" class="btn btn-primary" (click)="submit()" [disabled]="loading">
+    <i class="bx bx-hourglass bx-spin font-size-16 align-middle mr-2" *ngIf="loading"></i>Save changes</button>
+</div>
