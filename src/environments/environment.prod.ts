@@ -13,5 +13,7 @@ export const environment = {
     measurementId: ''
   },
 
-  "api_base_url": "localhost/jetproj/public/index.php/api"
+
+  // "api_base_url": "http://ec2-13-235-33-88.ap-south-1.compute.amazonaws.com/homefitindia/public/index.php"
+  "api_base_url": "http://ec2-13-232-21-118.ap-south-1.compute.amazonaws.com/homefitindia/public/index.php"
 };

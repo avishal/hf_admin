@@ -10,17 +10,26 @@
     <div class="col-lg-6">
       <div class="card">
         <div class="card-body">
-          <h4 class="card-title">Create Workout</h4>
+          <h4 class="card-title">Create Exercise</h4>
           <p class="card-title-desc">
-            Create new workout plan
+            Create new exercise
           </p>
           <form (ngSubmit)="typeSubmit()" [formGroup]="typeValidationForm">
             <div class="form-group">
               <label>Title</label>
               <input type="text" class="form-control" formControlName="title"
-                [ngClass]="{'is-invalid': typesubmit && type.title.errors}" placeholder="Enter plan title" />
+                [ngClass]="{'is-invalid': typesubmit && type.title.errors}" placeholder="Enter title" />
               <div *ngIf="typesubmit && type.title.errors" class="invalid-feedback">
                 <span *ngIf="type.title.errors.required">This value is required.</span>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label>Sub Title</label>
+              <input type="text" class="form-control" formControlName="sub_title"
+                [ngClass]="{'is-invalid': typesubmit && type.sub_title.errors}" placeholder="Enter sub title" />
+              <div *ngIf="typesubmit && type.sub_title.errors" class="invalid-feedback">
+                <span *ngIf="type.sub_title.errors.required">This value is required.</span>
               </div>
             </div>
 
@@ -71,15 +80,42 @@
                 <span *ngIf="type.focus_area.errors.required">This value is required.</span>
               </div>
             </div>
+
             <div class="form-group">
+              <label>Type</label>
+              <select formControlName="type" class="form-control"
+                [ngClass]="{'is-invalid': typesubmit && type.type.errors}">
+                <option value="">Select Exercise Type</option>
+                <option value="1">Repeatition Bound</option>
+                <option value="2">Time Bound</option>
+              </select>
+              <div *ngIf="typesubmit && type.type.errors" class="invalid-feedback">
+                <span *ngIf="type.type.errors.required">This value is required.</span>
+              </div>
+            </div>
+
+            <div class="form-group" *ngIf="type.type.value == 2">
               <label>Duration</label>
               <input type="text" class="form-control" formControlName="duration"
                 [ngClass]="{'is-invalid': typesubmit && type.duration.errors}" placeholder="Enter duration (in mins)" />
               <div *ngIf="typesubmit && type.duration.errors" class="invalid-feedback">
                 <span *ngIf="type.duration.errors.required">This value is required.</span>
                 <span *ngIf="type.duration.errors.pattern">This value should be number.</span>
+                <span *ngIf="type.duration.errors.typeMatch">This value is required if.</span>
               </div>
             </div>
+
+            <div class="form-group" *ngIf="type.type.value == 1">
+              <label>Repeatition</label>
+              <input type="text" class="form-control" formControlName="repeatition"
+                [ngClass]="{'is-invalid': typesubmit && type.repeatition.errors}" placeholder="Enter repeatition" />
+              <div *ngIf="typesubmit && type.repeatition.errors" class="invalid-feedback">
+                <span *ngIf="type.repeatition.errors.required">This value is required.</span>
+                <span *ngIf="type.repeatition.errors.pattern">This value should be number.</span>
+                <span *ngIf="type.duration.errors.typeMatch">This value is required if.</span>
+              </div>
+            </div>
+
             <div class="form-group">
               <label>Calories</label>
               <input type="text" class="form-control" formControlName="calories"

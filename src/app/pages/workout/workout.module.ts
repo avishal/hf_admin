@@ -14,13 +14,14 @@ import { DropzoneModule } from 'ngx-dropzone-wrapper';
 import { UIModule } from '../../shared/ui/ui.module';
 import { FormRoutingModule } from './form-routing.module';
 import { ValidationComponent } from './validation/validation.component';
+import { CreateExerciseComponent } from './create-exercise/create-exercise.component';
 import { ListSpComponent } from './list-sp/list-sp.component';
 import { EditCustomerModelComponent } from './edit-customer-model/edit-customer-model.component';
 import { CustomerService } from './customer.service';
 
 @NgModule({
   // tslint:disable-next-line: max-line-length
-  declarations: [ListSpComponent ,ValidationComponent,EditCustomerModelComponent],
+  declarations: [ListSpComponent ,ValidationComponent,CreateExerciseComponent,EditCustomerModelComponent],
   imports: [
     CommonModule,
     FormsModule,
