@@ -44,7 +44,7 @@ export class CreateExerciseComponent implements OnInit {
       focus_area: ['', [Validators.required]],
       type: ['', [Validators.required]],
       duration: ['', [Validators.pattern('[0-9]+'), TypeMatch]],
-      repeatition: ['', [, Validators.pattern('[0-9]+'), TypeMatch]],
+      repetition: ['', [, Validators.pattern('[0-9]+'), TypeMatch]],
       active_status: ['1', [Validators.required]],
       image: [''],
       video: ['', Validators.pattern(reg)],
@@ -90,20 +90,30 @@ export class CreateExerciseComponent implements OnInit {
 
     if(this.typeValidationForm.invalid)
     {
+      console.log(this.typeValidationForm);
       return;
     }
 
     let data = {
       title: this.type.title.value,
+      sub_title: this.type.sub_title.value,
       description: this.type.description.value,
       level: this.type.level.value,
       focus_area: this.type.focus_area.value,
-      duration: this.type.duration.value,
-      calories: this.type.calories.value,
+      type: this.type.type.value,
+      duration: "00:00",
+      repetition: 0,
       active_status: this.type.active_status.value,
+      video: this.type.video.value,
+      calories: this.type.calories.value,
     }
 
-    this.spservice.postWorkout(this.fileToUpload, data).subscribe( resp => {
+    if(this.type.type.value != 1)
+      data.duration = this.type.duration.value;
+    else 
+      data.repetition = this.type.repetition.value;
+
+    this.spservice.postExercise(this.fileToUpload, data).subscribe( resp => {
       console.log("resp", resp)
     }, err=>{ 
       console.log("err", err)

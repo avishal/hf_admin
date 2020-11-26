@@ -1,0 +1,146 @@
+<div class="modal-header">
+  <h5 class="modal-title mt-0">Edit Customer</h5>
+  <button type="button" class="close" aria-hidden="true" (click)="closeModal(0)">×</button>
+</div>
+<div class="modal-body">
+  <form (ngSubmit)="submit()" [formGroup]="typeValidationForm">
+
+    <div class="form-group">
+      <label>Title</label>
+      <input type="text" class="form-control" formControlName="title"
+        [ngClass]="{'is-invalid': typesubmit && type.title.errors}" placeholder="Enter title" />
+      <div *ngIf="typesubmit && type.title.errors" class="invalid-feedback">
+        <span *ngIf="type.title.errors.required">This value is required.</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Sub Title</label>
+      <input type="text" class="form-control" formControlName="sub_title"
+        [ngClass]="{'is-invalid': typesubmit && type.sub_title.errors}" placeholder="Enter sub title" />
+      <div *ngIf="typesubmit && type.sub_title.errors" class="invalid-feedback">
+        <span *ngIf="type.sub_title.errors.required">This value is required.</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Description</label>
+      <ckeditor [editor]="Editor" data="" formControlName="description"></ckeditor>
+
+    </div>
+    <div *ngIf="typesubmit && type.description.errors" class="invalid-feedback">
+      <span *ngIf="type.description.errors.required">This value is required.</span>
+    </div>
+    <div class="invalid-feedback">
+      <span>This value is required.</span>
+    </div>
+    <div class="form-group">
+      <label>Image Upload</label>
+      <img class="img-thumbnail" alt="200x200" width="200" src="{{imgURL}}" data-holder-rendered="true">
+      <div class="custom-file">
+        <input type="file" formControlName="image" #file (change)="handleFileInput($event.target.files)" id="customFile"
+          class="custom-file-input">
+        <label for="customFile" class="custom-file-label">Choose image</label>
+      </div>
+      <div *ngIf="typesubmit && type.image.errors" class="invalid-feedback">
+        <span *ngIf="type.image.errors.required">This value is required.</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Video URL</label>
+      <input type="text" class="form-control" formControlName="video"
+        [ngClass]="{'is-invalid': typesubmit && type.video.errors}"
+        placeholder="eg: https://www.youtube.com/watch?v=lA7dbOmxs5I" />
+      <div *ngIf="typesubmit && type.video.errors" class="invalid-feedback">
+        <span *ngIf="type.video.errors.pattern">This url pattern is invalid.</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Level</label>
+      <select formControlName="level" class="form-control" [ngClass]="{'is-invalid': typesubmit && type.level.errors}">
+        <option value="">Select level</option>
+        <option value="1">Level 1</option>
+        <option value="2">Level 2</option>
+        <option value="3">Level 3</option>
+        <option value="4">Level 4</option>
+      </select>
+
+      <div *ngIf="typesubmit && type.level.errors" class="invalid-feedback">
+        <span *ngIf="type.level.errors.required">This value is required.</span>
+        <span *ngIf="type.level.errors.pattern">This value should be number.</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Focus Area</label>
+      <input type="text" class="form-control" formControlName="focus_area"
+        [ngClass]="{'is-invalid': typesubmit && type.focus_area.errors}" placeholder="Enter focus area" />
+      <div *ngIf="typesubmit && type.focus_area.errors" class="invalid-feedback">
+        <span *ngIf="type.focus_area.errors.required">This value is required.</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Type</label>
+      <select formControlName="type" class="form-control" [ngClass]="{'is-invalid': typesubmit && type.type.errors}">
+        <option value="">Select Exercise Type</option>
+        <option value="1">Repetition Bound</option>
+        <option value="2">Time Bound</option>
+      </select>
+      <div *ngIf="typesubmit && type.type.errors" class="invalid-feedback">
+        <span *ngIf="type.type.errors.required">This value is required.</span>
+      </div>
+    </div>
+
+    <div class="form-group" *ngIf="type.type.value == 2">
+      <label>Duration</label>
+      <input type="time" class="form-control" formControlName="duration"
+        [ngClass]="{'is-invalid': typesubmit && type.duration.errors}" placeholder="Enter duration (in mins)" />
+      <div *ngIf="typesubmit && type.duration.errors" class="invalid-feedback">
+        <span *ngIf="type.duration.errors.required">This value is required.</span>
+        <span *ngIf="type.duration.errors.pattern">This value should be number.</span>
+        <span *ngIf="type.duration.errors.typeMatch">This value is required if.</span>
+      </div>
+    </div>
+
+    <div class="form-group" *ngIf="type.type.value == 1">
+      <label>Repetition</label>
+      <input type="text" class="form-control" formControlName="repetition"
+        [ngClass]="{'is-invalid': typesubmit && type.repetition.errors}" placeholder="Enter repetition" />
+      <div *ngIf="typesubmit && type.repetition.errors" class="invalid-feedback">
+        <span *ngIf="type.repetition.errors.required">This value is required.</span>
+        <span *ngIf="type.repetition.errors.pattern">This value should be number.</span>
+        <span *ngIf="type.duration.errors.typeMatch">This value is required if.</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Calories</label>
+      <input type="text" class="form-control" formControlName="calories"
+        [ngClass]="{'is-invalid': typesubmit && type.calories.errors}" placeholder="Enter calories (in mins)" />
+      <div *ngIf="typesubmit && type.calories.errors" class="invalid-feedback">
+        <span *ngIf="type.calories.errors.required">This value is required.</span>
+        <span *ngIf="type.calories.errors.pattern">This value should be number.</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Active Status</label>
+      <select formControlName="active_status" class="form-control"
+        [ngClass]="{'is-invalid': typesubmit && type.active_status.errors}">
+        <option value="">Select Active Status</option>
+        <option value="1">Active</option>
+        <option value="0">Inactive</option>
+      </select>
+      <div *ngIf="typesubmit && type.active_status.errors" class="invalid-feedback">
+        <span *ngIf="type.active_status.errors.required">This value is required.</span>
+      </div>
+    </div>
+
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-light" (click)="closeModal(0)">Close</button>
+  <button type="button" class="btn btn-primary" (click)="submit()" [disabled]="loading">
+    <i class="bx bx-hourglass bx-spin font-size-16 align-middle mr-2" *ngIf="loading"></i>Save changes</button>
+</div>

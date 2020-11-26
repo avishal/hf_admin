@@ -1,0 +1,63 @@
+<div class="container-fluid">
+  <app-page-title title="Basic Tables" [breadcrumbItems]="breadCrumbItems"></app-page-title>
+  
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Workout</h4>
+          <p class="card-title-desc">
+              
+          </p>
+          <div class="table-responsive">
+            <select [(ngModel)]="wpid" name="wp" class="form-control" (change)="getAssignedExercised()">
+              <option value="">Select Workout</option>
+              <option *ngFor="let wp of wps" value="{{wp.id}}">{{wp.title}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Exercise Assignment</h4>
+          <p class="card-title-desc">
+              
+          </p>
+          <div class="table-responsive">
+            <table class="table mb-0">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Image</th>
+                  <th>Title</th>
+                  <th>Level</th>
+                  <!-- <th>Active Status</th> -->
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let sp of sps; let i = index">
+                  <!-- <th scope="row">{{i + 1}}</th> -->
+                  <th scope="row">
+
+                    <input type="checkbox" (change)="assign($event, sp.id)" [checked]="ifexists(sp.id)"/>
+                  </th>
+                  <td><img class="img-thumbnail" alt="200x200" width="200" [src]="sp.small_image_url" data-holder-rendered="true"></td>
+                  <td>{{sp.title}}</td>
+                  <td>{{sp.level}}</td>
+                </tr>
+                
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end row -->
+</div>

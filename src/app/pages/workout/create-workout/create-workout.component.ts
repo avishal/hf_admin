@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { CustomerService } from '../customer.service';
-import { MustMatch } from './validation.mustmatch';
+import { MustMatch } from './create-workout.mustmatch';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
-  selector: 'app-validation',
-  templateUrl: './validation.component.html',
-  styleUrls: ['./validation.component.scss']
+  selector: 'app-create-workout',
+  templateUrl: './create-workout.component.html',
+  styleUrls: ['./create-workout.component.scss']
 })
 
 /**
  * Forms Validation component
  */
-export class ValidationComponent implements OnInit {
+export class CreateWorkoutComponent implements OnInit {
 
   typeValidationForm: FormGroup; // type validation form
 

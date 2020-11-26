@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CreateExerciseComponent } from './create-exercise/create-exercise.component';
+import { ListExerciseComponent } from './list-exercise/list-exercise.component';
 
 import { ListSpComponent } from './list-sp/list-sp.component';
-import { ValidationComponent } from './validation/validation.component';
+import { CreateWorkoutComponent } from './create-workout/create-workout.component';
+import { AssignExerciseComponent } from './assign-exercise/assign-exercise.component';
 
 const routes: Routes = [
     {
@@ -12,11 +14,19 @@ const routes: Routes = [
     },
     {
         path: 'create-new',
-        component: ValidationComponent
+        component: CreateWorkoutComponent
+    },
+    {
+        path: 'exercises',
+        component: ListExerciseComponent
     },
     {
         path: 'create-exercise',
         component: CreateExerciseComponent
+    },
+    {
+        path: 'assign-exercise',
+        component: AssignExerciseComponent
     },
 ];
 

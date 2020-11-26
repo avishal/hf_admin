@@ -620,6 +620,25 @@ export const MENU: MenuItem[] = [
             },
         ]
     },
+    {
+        id: 1010,
+        icon: 'bx-list-ul',
+        label: 'MENUITEMS.EXERCISE.TEXT',
+        subItems: [
+            {
+                id: 89,
+                label: 'MENUITEMS.EXERCISE.LIST.BASIC',
+                link: '/workout/exercises',
+                parentId: 88
+            },
+            {
+                id: 89,
+                label: 'MENUITEMS.EXERCISE.LIST.CREATENEW',
+                link: '/workout/create-exercise',
+                parentId: 88
+            },
+        ]
+    },
     /*{
         id: 91,
         icon: 'bxs-bar-chart-alt-2',
