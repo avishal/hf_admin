@@ -23,6 +23,10 @@ export class ListSpComponent implements OnInit {
 
   ngOnInit() {
     this.breadCrumbItems = [{ label: 'Customers' }, { label: 'All Customers', active: true }];
+    this.loadData();
+  }
+
+  loadData(){
     this.spservice.getAllWP().subscribe(resp => {
       console.log(resp);
       this.sps = resp.data
@@ -36,6 +40,7 @@ export class ListSpComponent implements OnInit {
     modalRef.componentInstance.id = id;
     modalRef.result.then((receivedEntry) => {
       console.log("received",receivedEntry);
+      this.loadData();
     })
   }
   
@@ -58,6 +63,7 @@ export class ListSpComponent implements OnInit {
       if (result.value) {
         this.spservice.postDeleteWorkout(id).subscribe( resp => {
           Swal.fire('Deleted!', 'Workout has been deleted.', 'success');
+          this.loadData();
         }, err=>{ 
           console.log("err", err)
         });

@@ -1,0 +1,97 @@
+<div class="container-fluid">
+  <app-page-title title="Customer Orders" [breadcrumbItems]="breadCrumbItems"></app-page-title>
+  
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">New Orders / Pending Orders</h4>
+          <p class="card-title-desc">
+              <!-- <ngb-alert role="alert" class="alert alert-primary alert-dismissible" ng-reflect-type="primary">
+                A simple primary alert—check it out!
+                <button type="button" class="close" aria-label="Close"><span aria-hidden="true">×</span></button>
+              </ngb-alert> -->
+          </p>
+          <div class="table-responsive">
+            <table class="table mb-0">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Customer Name /Email/Phone</th>
+                  <th>Plan Name</th>
+                  <th>Start Date / End Date</th>
+                  <th>Order number</th>
+                  <th>Payment Details / Amount</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let sp of non_complete_orders; let i = index">
+                  <th scope="row">{{i + 1}}</th>
+                  <td>{{ (sp.user != null) ? (sp.user.name) : ""}} | {{sp.user != null ? sp.user.email: ""}} | {{sp.user != null ? sp.user.phone:""}}</td>
+                  <td>{{ (sp.user_subscription.subscription != null) ? (sp.user_subscription.subscription.title) : ""}}</td>
+                  <td>{{ (sp.user_subscription.subscription != null) ? (sp.user_subscription.subscription.start_date | date) :"" }} - {{ (sp.user_subscription.subscription != null) ? (sp.user_subscription.subscription.end_date | date) :"" }}</td>
+                  <td>{{sp.order_no }}</td>
+                  <td>{{sp.user_subscription.paymentid}} | {{sp.user_subscription.price | currency:"INR"}}</td>
+                  <td><span class="badge badge-danger">{{ sp.status }}</span></td>
+                  <td> <a [routerLink]="" (click)="edit(sp.id)"> status</a> | <a [routerLink]="['/invoice', sp.id ]" >Invoice</a></td><!-- | <a [routerLink]="" (click)="delete(sp.id)">Delete</a>-->
+                </tr>
+                
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end row -->
+
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Old Orders</h4>
+          <p class="card-title-desc">
+              <!-- <ngb-alert role="alert" class="alert alert-primary alert-dismissible" ng-reflect-type="primary">
+                A simple primary alert—check it out!
+                <button type="button" class="close" aria-label="Close"><span aria-hidden="true">×</span></button>
+              </ngb-alert> -->
+          </p>
+          <div class="table-responsive">
+            <table class="table mb-0">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Customer Name /Email/Phone</th>
+                  <th>Plan Name</th>
+                  <th>Start Date / End Date</th>
+                  <th>Order number</th>
+                  <th>Payment Details / Amount</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let sp of non_pending_orders; let i = index">
+                  <th scope="row">{{i + 1}}</th>
+                  <td>{{sp.user != null ? sp.user.name :""}} | {{sp.user != null ? sp.user.email:""}} | {{sp.user != null ? sp.user.phone:""}}</td>
+                  <td>{{ (sp.user_subscription.subscription != null) ? (sp.user_subscription.subscription.title) : ''}}</td>
+                  <td>{{ (sp.user_subscription.subscription != null) ? (sp.user_subscription.subscription.start_date | date) : '' }} - {{ (sp.user_subscription.subscription!= null) ? (sp.user_subscription.subscription.end_date | date) :""}}</td>
+                  <td>{{sp.order_no }}</td>
+                  <td>{{sp.user_subscription.paymentid}} | {{sp.user_subscription.price | currency:"INR"}}</td>
+                  <td><span class="badge badge-success">{{ sp.status }}</span></td>
+                  <td> <a [routerLink]="" (click)="edit(sp.id)">Change Order status</a></td><!-- | <a [routerLink]="" (click)="delete(sp.id)">Delete</a>-->
+                </tr>
+                
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

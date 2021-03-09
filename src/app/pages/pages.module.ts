@@ -30,6 +30,8 @@ import { UiModule } from './ui/ui.module';
 import { FormModule } from './form/form.module';
 import { SubscriptionsModule } from './subscriptions/subscriptions.module';
 import { CustomersModule } from './customers/customers.module';
+import { OrdersModule } from './orders/orders.module';
+import { OperatingRegionsModule } from './operating-regions/operating-regions.module';
 import { WorkoutModule } from './workout/workout.module';
 import { TablesModule } from './tables/tables.module';
 import { CitiesModule } from './cities/cities.module';
@@ -71,6 +73,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     FormModule,
     SubscriptionsModule,
     CustomersModule,
+    OrdersModule,
+    OperatingRegionsModule,
     WorkoutModule,
     TablesModule,
     CitiesModule,
@@ -81,7 +85,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     FullCalendarModule,
     NgbNavModule,
     NgbTooltipModule,
-    PerfectScrollbarModule
+    PerfectScrollbarModule,
   ],
   providers: [
     {

@@ -1,0 +1,43 @@
+<div class="modal-header">
+  <h5 class="modal-title mt-0">Edit Customer Document Status</h5>
+  <button type="button" class="close" aria-hidden="true" (click)="closeModal(0)">×</button>
+</div>
+<div class="modal-body">
+<form (ngSubmit)="submit()" [formGroup]="typeValidationForm">
+  <div class="form-group">
+    <label>Remarks</label>
+    <input type="text" class="form-control" formControlName="remark"
+      [ngClass]="{'is-invalid': typesubmit && type.remark.errors}" placeholder="Enter remarks" />
+  </div>
+  
+  <div class="form-group">
+    <label>Verified Status</label>
+    <select formControlName="verified" class="form-control" [ngClass]="{'is-invalid': typesubmit && type.verified.errors}">
+      <option value="">Select Verified Status</option>
+      <option value="0">Pending</option>
+      <option value="1">Accepted</option>
+      <option value="2">Rejected</option>
+    </select>
+    <div *ngIf="typesubmit && type.verified.errors" class="invalid-feedback">
+      <span *ngIf="type.verified.errors.required">This value is required.</span>
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Active Status</label>
+    <select formControlName="active_status" class="form-control" [ngClass]="{'is-invalid': typesubmit && type.active_status.errors}">
+      <option value="">Select Active Status</option>
+      <option value="1">Active</option>
+      <option value="0">Inactive</option>
+    </select>
+    <div *ngIf="typesubmit && type.active_status.errors" class="invalid-feedback">
+      <span *ngIf="type.active_status.errors.required">This value is required.</span>
+    </div>
+  </div>
+  <span *ngIf="error">{{errorMessage}}</span>
+</form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-light" (click)="closeModal(0)">Close</button>
+  <button type="button" class="btn btn-primary" (click)="submit()" [disabled]="loading">
+    <i class="bx bx-hourglass bx-spin font-size-16 align-middle mr-2" *ngIf="loading"></i>Save changes</button>
+</div>

@@ -1,0 +1,78 @@
+<div class="container-fluid">
+
+  <!-- start page title -->
+  <app-page-title title="Form Validation" [breadcrumbItems]="breadCrumbItems"></app-page-title>
+  <!-- end page title -->
+
+
+
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Operating Regions</h4>
+          <p class="card-title-desc">
+            Create new Operating Regions
+          </p>
+          <form (ngSubmit)="typeSubmit()" [formGroup]="typeValidationForm">
+            <div class="form-group">
+              <label>State</label>
+              <select class="form-control" formControlName="state_id" [ngClass]="{'is-invalid': typesubmit && type.state_id.errors}"
+              (change)="getCities()">
+                <option *ngFor="let item of states" value={{item.id}}>{{ item.name }}</option>
+              </select>
+              <div *ngIf="typesubmit && type.state_id.errors" class="invalid-feedback">
+                <span *ngIf="type.state_id.errors.required">This value is required.</span>
+              </div>
+            </div>
+
+
+            <div class="form-group">
+              <label>City</label>
+              <select class="form-control" formControlName="city_id" [ngClass]="{'is-invalid': typesubmit && type.city_id.errors}">
+                <option *ngFor="let item of cities" value={{item.id}}>{{ item.name }}</option>
+              </select>
+              <div *ngIf="typesubmit && type.city_id.errors" class="invalid-feedback">
+                <span *ngIf="type.city_id.errors.required">This value is required.</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Pincode</label>
+              <input type="text" class="form-control" formControlName="pincode"
+                [ngClass]="{'is-invalid': typesubmit && type.pincode.errors}" placeholder="Enter plan pincode" />
+              <div *ngIf="typesubmit && type.pincode.errors" class="invalid-feedback">
+                <span *ngIf="type.pincode.errors.required">This value is required.</span>
+                <span *ngIf="type.pincode.errors.pattern">Invalid pincode.</span>
+                <span *ngIf="type.pincode.errors.minLength">Invalid pincode.</span>
+                <span *ngIf="type.pincode.errors.maxLength">Invalid pincode.</span>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label>Active Status</label>
+              <div class="custom-control custom-checkbox mb-3">
+                <input type="checkbox" formControlName="active_status" class="custom-control-input" id="customCheck1" checked [ngClass]="{'is-invalid': typesubmit && type.active_status.errors}" >
+                <label class="custom-control-label" for="customCheck1">Active/Inactive</label>
+              </div>
+              <div *ngIf="typesubmit && type.active_status.errors" class="invalid-feedback">
+                <span *ngIf="type.active_status.errors.required">This value is required.</span>
+              </div>
+            </div>
+            
+            <div class="form-group mb-0">
+              <div>
+                <button type="submit" class="btn btn-primary mr-1">
+                  Submit
+                </button>
+                <button type="reset" class="btn btn-secondary">
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

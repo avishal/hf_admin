@@ -5,6 +5,7 @@ import { from } from 'rxjs';
 import {CustomerService} from '../customer.service';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { TypeMatch } from '../create-exercise/create-exercise.typematch';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-edit-exercise-model',
@@ -36,7 +37,7 @@ export class EditExerciseModelComponent implements OnInit {
 
 
     this.typeValidationForm = this.formBuilder.group({
-      title: ['', [Validators.required]],
+      title: ['', [Validators.required, Validators.pattern('[a-zA-Z-_ ]+')]],
       sub_title: [''],
       description: ['',[Validators.required]],
       level: ['',[Validators.required]],
@@ -46,7 +47,7 @@ export class EditExerciseModelComponent implements OnInit {
       repetition: ['', [, Validators.pattern('[0-9]+'), TypeMatch]],
       active_status: ['1', [Validators.required]],
       image: [''],
-      video: ['', Validators.pattern(reg)],
+      video: [''/*, Validators.pattern(reg)*/],
       calories: [''],
     },{
       validator: [TypeMatch('type','duration')],
@@ -136,20 +137,39 @@ export class EditExerciseModelComponent implements OnInit {
       calories: this.type.calories.value,
       active_status: this.type.active_status.value,
     }
-    
-    this.spservice.postUpdateExercise(this.id, data).subscribe( resp => {
-      
-      this.loading = false;
-      this.error = false;
-      this.errorMessage = ""
 
-      this.activeModal.close(this.id);
-    }, err=>{ 
-      this.loading = false;
-      this.error = true;
-      this.errorMessage = "Something went wrong.";
-      console.log("err", err)
-    });
+    if(this.fileToUpload != null)
+    {
+      this.spservice.postUpdateExercise(this.id, this.fileToUpload, data).subscribe( resp => {
+        
+        this.loading = false;
+        this.error = false;
+        this.errorMessage = ""
+        this.successmsg();
+        this.activeModal.close(this.id);
+      }, err=>{ 
+        this.loading = false;
+        this.error = true;
+        this.errorMessage = "Something went wrong.";
+        console.log("err", err)
+      });
+    }
+    else 
+    {
+      this.spservice.postUpdateExerciseWOImage(this.id, data).subscribe( resp => {
+        
+        this.loading = false;
+        this.error = false;
+        this.errorMessage = ""
+        this.successmsg();
+        this.activeModal.close(this.id);
+      }, err=>{ 
+        this.loading = false;
+        this.error = true;
+        this.errorMessage = "Something went wrong.";
+        console.log("err", err)
+      });
+    }
   }
   
   closeModal(id)
@@ -160,5 +180,9 @@ export class EditExerciseModelComponent implements OnInit {
 
   get type() {
     return this.typeValidationForm.controls;
+  }
+
+  successmsg() {
+    Swal.fire('Good job!', 'Saved!', 'success');
   }
 }

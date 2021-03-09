@@ -1,0 +1,45 @@
+<div class="container-fluid">
+  <app-page-title title="Live Videos" [breadcrumbItems]="breadCrumbItems"></app-page-title>
+  
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Live Videos</h4>
+          <p class="card-title-desc">
+              <!-- <ngb-alert role="alert" class="alert alert-primary alert-dismissible" ng-reflect-type="primary">
+                A simple primary alert—check it out!
+                <button type="button" class="close" aria-label="Close"><span aria-hidden="true">×</span></button>
+              </ngb-alert> -->
+          </p>
+          <div class="table-responsive">
+            <table class="table mb-0">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Title</th>
+                  <th>Video Id</th>
+                  <th>Active Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let sp of sps; let i = index">
+                  <th scope="row">{{i + 1}}</th>
+                  <td>{{sp.title != null ? sp.title : ""}}</td>
+                  <td>{{sp.videoid != null ? sp.videoid : ""}}</td>
+                  <td><span *ngIf="sp.status" class="badge badge-success">Active</span>
+                    <span *ngIf="sp.status != 1" class="badge badge-danger ml-1">Inactive</span></td>
+                  <td> <a [routerLink]="" (click)="edit(sp.id)">Edit</a> | <a [routerLink]="" (click)="delete(sp.id)">Delete</a></td>
+                </tr>
+                
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end row -->
+</div>

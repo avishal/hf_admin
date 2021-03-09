@@ -24,6 +24,11 @@ export class ListSpComponent implements OnInit {
 
   ngOnInit() {
     this.breadCrumbItems = [{ label: 'Tables' }, { label: 'Subscription Plans', active: true }];
+    this.getData();
+  }
+
+  getData()
+  {
     this.spservice.getAllSP().subscribe(resp => {
       console.log(resp);
       this.sps = resp.data
@@ -37,6 +42,7 @@ export class ListSpComponent implements OnInit {
     modalRef.componentInstance.id = id;
     modalRef.result.then((receivedEntry) => {
       console.log("received",receivedEntry);
+      this.getData();
     })
   }
   
@@ -58,6 +64,7 @@ export class ListSpComponent implements OnInit {
       if (result.value) {
         this.spservice.postDeleteSP(id).subscribe( resp => {
           Swal.fire('Deleted!', 'Plan has been deleted.', 'success');
+          this.getData();
         }, err=>{ 
           console.log("err", err)
         });

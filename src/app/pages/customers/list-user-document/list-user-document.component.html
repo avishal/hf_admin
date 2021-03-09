@@ -1,0 +1,51 @@
+<div class="container-fluid">
+  <app-page-title title="Customer Documents" [breadcrumbItems]="breadCrumbItems"></app-page-title>
+
+  <a routerLink="/customers" class="btn btn-primary"> &lt; Go Back </a>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Customer Documents</h4>
+          <p class="card-title-desc">
+              <!-- <ngb-alert role="alert" class="alert alert-primary alert-dismissible" ng-reflect-type="primary">
+                A simple primary alert—check it out!
+                <button type="button" class="close" aria-label="Close"><span aria-hidden="true">×</span></button>
+              </ngb-alert> -->
+          </p>
+          <div class="table-responsive">
+            <table class="table mb-0">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Document Type</th>
+                  <th>File</th>
+                  <th>Verified</th>
+                  <th>Active Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngIf="userDocs.length == 0">
+                  <td>No documents uploaded</td>
+                </tr>
+                <tr *ngFor="let ud of userDocs; let i = index">
+                  <th scope="row">{{i + 1}}</th>
+                  <td>{{ud.type}}</td>
+                  <td><img class="img-thumbnail" alt="200x200" width="200" [src]="ud.small_image_url" data-holder-rendered="true"></td>
+                  <td>{{ud.verified}}</td>
+                  <td><span *ngIf="ud.active_status" class="badge badge-success">Active</span>
+                    <span *ngIf="ud.active_status != 1" class="badge badge-danger ml-1">Inactive</span></td>
+                  <td> <a [routerLink]="" (click)="edit(ud.id)">Edit</a> | <a [routerLink]="" (click)="delete(ud.id)">Delete</a></td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end row -->
+</div>

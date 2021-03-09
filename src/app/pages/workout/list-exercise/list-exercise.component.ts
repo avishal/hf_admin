@@ -24,12 +24,18 @@ export class ListExerciseComponent implements OnInit {
 
   ngOnInit() {
     this.breadCrumbItems = [{ label: 'Customers' }, { label: 'All Customers', active: true }];
+    
+    this.loadData();
+  }
+
+  loadData(){
     this.spservice.getAllExercises().subscribe(resp => {
       console.log(resp);
       this.sps = resp.data
     })
   }
 
+  
   edit(id)
   {
     // this.modalService.open(EditCustomerModelComponent, {size: 'lg',windowClass:'modal-holder', centered: true });
@@ -37,6 +43,7 @@ export class ListExerciseComponent implements OnInit {
     modalRef.componentInstance.id = id;
     modalRef.result.then((receivedEntry) => {
       console.log("received",receivedEntry);
+      this.loadData();
     })
   }
   
@@ -59,6 +66,7 @@ export class ListExerciseComponent implements OnInit {
       if (result.value) {
         this.spservice.postDeleteExercise(id).subscribe( resp => {
           Swal.fire('Deleted!', 'Exercise has been deleted.', 'success');
+          this.loadData();
         }, err=>{ 
           console.log("err", err)
         });

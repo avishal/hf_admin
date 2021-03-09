@@ -3,6 +3,7 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { CustomerService } from '../customer.service';
 import { MustMatch } from './validation.mustmatch';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-validation',
@@ -21,7 +22,7 @@ export class ValidationComponent implements OnInit {
   rangeValidationForm: FormGroup; // range validation form
 
   constructor(public formBuilder: FormBuilder,
-    public spservice:CustomerService) { }
+    public spservice:CustomerService, private router:Router) { }
   // bread crumb items
   breadCrumbItems: Array<{}>;
   public Editor = ClassicEditor;
@@ -143,6 +144,7 @@ export class ValidationComponent implements OnInit {
     }
     this.spservice.postSP(data).subscribe( resp => {
       console.log("resp", resp)
+      this.router.navigate([''])
     }, err=>{ 
       console.log("err", err)});
   }

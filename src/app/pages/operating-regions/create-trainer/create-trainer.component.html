@@ -1,0 +1,87 @@
+<div class="container-fluid">
+
+  <!-- start page title -->
+  <app-page-title title="Form Validation" [breadcrumbItems]="breadCrumbItems"></app-page-title>
+  <!-- end page title -->
+
+
+
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Trainer</h4>
+          <p class="card-title-desc">
+            Create new Trainer
+          </p>
+          <form (ngSubmit)="typeSubmit()" [formGroup]="typeValidationForm">
+            <div class="form-group">
+              <label>Name</label>
+              <input type="text" class="form-control" placeholder="Enter name" formControlName="name" [ngClass]="{'is-invalid': typesubmit && type.name.errors}"/>
+              <div *ngIf="typesubmit && type.name.errors" class="invalid-feedback">
+                <span *ngIf="type.name.errors.required">This value is required.</span>
+              </div>
+            </div>
+
+
+            <div class="form-group">
+              <label>Image Upload</label>
+              <img class="img-thumbnail" alt="200x200" width="200" src="{{imgURL}}" data-holder-rendered="true">
+              <div class="custom-file">
+                <input type="file" formControlName="image" #file (change)="handleFileInput($event.target.files)"
+                  id="customFile" class="custom-file-input">
+                <label for="customFile" class="custom-file-label">Choose image</label>
+                <div *ngIf="typesubmit && type.image.errors" class="invalid-feedback">
+                  <span *ngIf="type.image.errors.required">This value is required.</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Description</label>
+              <div>
+                <ckeditor [editor]="Editor" data="" formControlName="description"></ckeditor>
+                <!-- <textarea formControlName="description" class="form-control" rows="5"
+                  [ngClass]="{'is-invalid': typesubmit && type.description.errors}"></textarea> -->
+                <div *ngIf="typesubmit && type.description.errors" class="invalid-feedback">
+                  <span *ngIf="type.description.errors.required">This value is required.</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label>Expert In</label>
+              <input type="text" class="form-control" formControlName="expert"
+                [ngClass]="{'is-invalid': typesubmit && type.expert.errors}" placeholder="Enter expert in" />
+              <div *ngIf="typesubmit && type.expert.errors" class="invalid-feedback">
+                <span *ngIf="type.expert.errors.required">This value is required.</span>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label>Active Status</label>
+              <div class="custom-control custom-checkbox mb-3">
+                <input type="checkbox" formControlName="status" class="custom-control-input" id="customCheck1" checked [ngClass]="{'is-invalid': typesubmit && type.status.errors}" >
+                <label class="custom-control-label" for="customCheck1">Active/Inactive</label>
+              </div>
+              <div *ngIf="typesubmit && type.status.errors" class="invalid-feedback">
+                <span *ngIf="type.status.errors.required">This value is required.</span>
+              </div>
+            </div>
+            
+            <div class="form-group mb-0">
+              <div>
+                <button type="submit" class="btn btn-primary mr-1">
+                  Submit
+                </button>
+                <button type="reset" class="btn btn-secondary">
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

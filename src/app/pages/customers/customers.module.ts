@@ -15,12 +15,15 @@ import { UIModule } from '../../shared/ui/ui.module';
 import { FormRoutingModule } from './form-routing.module';
 import { ValidationComponent } from './validation/validation.component';
 import { ListSpComponent } from './list-sp/list-sp.component';
+import { ListUserDocumentComponent } from './list-user-document/list-user-document.component';
 import { EditCustomerModelComponent } from './edit-customer-model/edit-customer-model.component';
+import { EditCustomerDocumentModelComponent } from './edit-customer-document-model/edit-customer-document-model.component';
+import { AddEditDietExerciseComponent } from './add-edit-diet-exercise/add-edit-diet-exercise.component';
 import { CustomerService } from './customer.service';
 
 @NgModule({
   // tslint:disable-next-line: max-line-length
-  declarations: [ListSpComponent ,ValidationComponent,EditCustomerModelComponent],
+  declarations: [ListSpComponent ,ValidationComponent,EditCustomerModelComponent,ListUserDocumentComponent, EditCustomerDocumentModelComponent, AddEditDietExerciseComponent],
   imports: [
     CommonModule,
     FormsModule,

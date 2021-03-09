@@ -29,6 +29,7 @@ export class CustomerService {
     getCustomer(id) {
         return this.http.get<any>(environment.api_base_url+`/api/customer/${id}`);
     }
+    
     postSP(data) {
         return this.http.post<any>(environment.api_base_url+`/api/sp`, data);
     }
@@ -36,8 +37,32 @@ export class CustomerService {
     postUpdateCustomer(id, data) {
         return this.http.post<any>(environment.api_base_url+`/api/customer-update/${id}`, data);
     }
-
+    
     postDeleteCustomer(id) {
         return this.http.post<any>(environment.api_base_url+`/api/customer-delete/${id}`, null);
+    }
+
+    getAllUserDocuments(user_id) {
+        return this.http.get<any>(environment.api_base_url+`/api/customer/get-all-documents/${user_id}`);
+    }
+    getCustomerDocument(docid) {
+        return this.http.get<any>(environment.api_base_url+`/api/customer/get-document/${docid}`);
+    }
+    postUpdateCustomerDocumentStatus(doc_id, data) {
+        return this.http.post<any>(environment.api_base_url+`/api/customer/get-document/${doc_id}`, data);
+    }
+    postDeleteCustomerDocument(docid) {
+        return this.http.post<any>(environment.api_base_url+`/api/customer/delete-document/${docid}`, null);
+    }
+
+    postDietExercise(user_id, data) {
+        return this.http.post<any>(environment.api_base_url+`/api/add-diet-exercise/${user_id}`, data);
+    }
+
+    getDietExercise(id) {
+        return this.http.get<any>(environment.api_base_url+`/api/get-diet-exercise/${id}`);
+    }
+    getTrainers() {
+        return this.http.get<any>(environment.api_base_url+`/api/trainers`);
     }
 }

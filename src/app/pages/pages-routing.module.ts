@@ -6,7 +6,8 @@ import { ChatComponent } from './chat/chat.component';
 import { DefaultComponent } from './dashboards/default/default.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'dashboard' },
+  // { path: '', redirectTo: 'dashboard' },
+  { path: '', redirectTo: 'orders' },
   { path: 'dashboard', component: DefaultComponent },
   { path: 'calendar', component: CalendarComponent },
   { path: 'chat', component: ChatComponent },
@@ -23,12 +24,15 @@ const routes: Routes = [
   { path: 'form', loadChildren: () => import('./form/form.module').then(m => m.FormModule) },
   { path: 'subscriptions', loadChildren: () => import('./subscriptions/subscriptions.module').then(m => m.SubscriptionsModule) },
   { path: 'customers', loadChildren: () => import('./customers/customers.module').then(m => m.CustomersModule) },
+  { path: 'orders', loadChildren: () => import('./orders/orders.module').then(m => m.OrdersModule) },
   { path: 'workout', loadChildren: () => import('./workout/workout.module').then(m => m.WorkoutModule) },
+  { path: 'operating-regions', loadChildren: () => import('./operating-regions/operating-regions.module').then(m => m.OperatingRegionsModule) },
   { path: 'tables', loadChildren: () => import('./tables/tables.module').then(m => m.TablesModule) },
   { path: 'city', loadChildren: () => import('./cities/cities.module').then(m => m.CitiesModule) },
   { path: 'icons', loadChildren: () => import('./icons/icons.module').then(m => m.IconsModule) },
   { path: 'charts', loadChildren: () => import('./chart/chart.module').then(m => m.ChartModule) },
-  { path: 'maps', loadChildren: () => import('./maps/maps.module').then(m => m.MapsModule) }
+  { path: 'maps', loadChildren: () => import('./maps/maps.module').then(m => m.MapsModule) },
+  { path: 'address', loadChildren: () => import('./address/address.module').then(m => m.AddressModule) }
 ];
 
 @NgModule({
