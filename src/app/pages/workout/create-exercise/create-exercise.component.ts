@@ -4,6 +4,7 @@ import { CustomerService } from '../customer.service';
 import { MustMatch } from './create-exercise.mustmatch';
 import { TypeMatch } from './create-exercise.typematch';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-create-exercise',
@@ -30,25 +31,25 @@ export class CreateExerciseComponent implements OnInit {
 
     this.breadCrumbItems = [{ label: 'Forms' }, { label: 'Form Validation', active: true }];
 
-    const reg = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
+    // const reg = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
 
   
     /**
      * Type validation form
      */
     this.typeValidationForm = this.formBuilder.group({
-      title: ['', [Validators.required]],
+      title: ['', [Validators.required, Validators.pattern('[a-zA-Z-_ ]+')]],
       sub_title: [''],
       description: ['',[Validators.required]],
       level: ['',[Validators.required]],
       focus_area: ['', [Validators.required]],
       type: ['', [Validators.required]],
       duration: ['', [Validators.pattern('[0-9]+'), TypeMatch]],
-      repetition: ['', [, Validators.pattern('[0-9]+'), TypeMatch]],
+      repetition: ['', [Validators.pattern('[0-9]+'), TypeMatch]],
       active_status: ['1', [Validators.required]],
       image: [''],
-      video: ['', Validators.pattern(reg)],
-      calories: [''],
+      video: [''], /*Validators.pattern(reg)*/
+      calories: ['',[Validators.pattern('[0-9]+')]],
     },{
       validator: [TypeMatch('type','duration')],
     });
@@ -65,9 +66,13 @@ export class CreateExerciseComponent implements OnInit {
     return this.typeValidationForm.controls;
   }
 
-  fileToUpload
+  fileToUpload = null
   imagePath
   imgURL
+  loading = false
+  error = false
+  errorMessage=""
+
   handleFileInput(files: FileList) {
     this.fileToUpload = files.item(0);
     console.log(this.fileToUpload);
@@ -84,7 +89,7 @@ export class CreateExerciseComponent implements OnInit {
   /**
    * Type validation form submit data
    */
-  typeSubmit() {
+  typeSubmit(exForm) {
     this.typesubmit = true;
     
 
@@ -113,11 +118,47 @@ export class CreateExerciseComponent implements OnInit {
     else 
       data.repetition = this.type.repetition.value;
 
-    this.spservice.postExercise(this.fileToUpload, data).subscribe( resp => {
-      console.log("resp", resp)
-    }, err=>{ 
-      console.log("err", err)
-    });
+    if(this.fileToUpload != null)
+    {
+      this.spservice.postExercise(this.fileToUpload, data).subscribe( resp => {
+        console.log("resp", resp);
+        this.successmsg();
+        exForm.reset();
+        this.typesubmit = false;
+        this.loading = false;
+        this.error = false;
+        this.errorMessage = "";
+
+      }, err=>{ 
+        console.log("err", err)
+        this.loading = false;
+        this.error = true;
+        this.errorMessage = "Something went wrong. Unable to save";
+
+      });
+    }
+    else {
+      this.spservice.postExerciseWOImage(data).subscribe( resp => {
+        console.log("resp", resp);
+        this.successmsg();
+        exForm.reset();
+        this.typesubmit = false;
+        this.loading = false;
+        this.error = false;
+        this.errorMessage = "";
+
+      }, err=>{ 
+        console.log("err", err)
+        this.loading = false;
+        this.error = true;
+        this.errorMessage = "Something went wrong. Unable to save";
+
+      });
+    }
+  }
+
+  successmsg() {
+    Swal.fire('Good job!', 'Saved!', 'success');
   }
     
 }

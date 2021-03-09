@@ -50,6 +50,16 @@
       </div>
     </div>
     <div class="form-group">
+      <label>Tax</label>
+      <input type="text" class="form-control" formControlName="tax"
+        [ngClass]="{'is-invalid': typesubmit && type.tax.errors}" placeholder="Enter tax amount" />
+      <div *ngIf="typesubmit && type.tax.errors" class="invalid-feedback">
+        <span *ngIf="type.tax.errors.required">This value is required.</span>
+        <span *ngIf="type.tax.errors.pattern">This value should be number.</span>
+      </div>
+    </div>
+    Total Price: {{type.price.value}} - {{type.discount.value}} + {{type.tax.value}}% = {{type.price.value - type.discount.value + ((type.price.value - type.discount.value) * (type.tax.value/100))}}
+    <div class="form-group">
       <label>Duration</label>
       <input type="text" class="form-control" formControlName="duration"
         [ngClass]="{'is-invalid': typesubmit && type.duration.errors}" placeholder="Enter plan duration (in days)" />

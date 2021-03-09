@@ -639,6 +639,121 @@ export const MENU: MenuItem[] = [
             },
         ]
     },
+    {
+        id: 1010,
+        icon: 'bx-list-ul',
+        label: 'MENUITEMS.ASSIGNEXERCISE.TEXT',
+        subItems: [
+            {
+                id: 89,
+                label: 'MENUITEMS.ASSIGNEXERCISE.LIST.BASIC',
+                link: '/workout/assign-exercise',
+                parentId: 88
+            },
+        ]
+    },
+    {
+        id: 1010,
+        icon: 'bx-list-ul',
+        label: 'MENUITEMS.OPERATIONREGIONS.TEXT',
+        subItems: [
+            {
+                id: 89,
+                label: 'MENUITEMS.OPERATIONREGIONS.LIST.SHOW',
+                link: '/operating-regions',
+                parentId: 88
+            },
+            {
+                id: 89,
+                label: 'MENUITEMS.OPERATIONREGIONS.LIST.CREATE',
+                link: '/operating-regions/create-new',
+                parentId: 88
+            },
+        ]
+    },
+    {
+        id: 1010,
+        icon: 'bx-list-ul',
+        label: 'MENUITEMS.PROMOVIDEO.TEXT',
+        subItems: [
+            {
+                id: 89,
+                label: 'MENUITEMS.PROMOVIDEO.LIST.SHOW',
+                link: '/promo-video',
+                parentId: 88
+            },
+        ]
+    },
+    {
+        id: 1010,
+        icon: 'bx-list-ul',
+        label: 'MENUITEMS.LIVEVIDEOS.TEXT',
+        subItems: [
+            {
+                id: 89,
+                label: 'MENUITEMS.LIVEVIDEOS.LIST.SHOW',
+                link: '/operating-regions/live-video',
+                parentId: 88
+            },
+            {
+                id: 89,
+                label: 'MENUITEMS.LIVEVIDEOS.LIST.CREATE',
+                link: '/operating-regions/create-new-lv',
+                parentId: 88
+            },
+        ]
+    },
+    {
+        id: 1010,
+        icon: 'bx-list-ul',
+        label: 'MENUITEMS.SAMPLEVIDEOS.TEXT',
+        subItems: [
+            {
+                id: 89,
+                label: 'MENUITEMS.SAMPLEVIDEOS.LIST.SHOW',
+                link: '/operating-regions/sample-video',
+                parentId: 88
+            },
+            {
+                id: 89,
+                label: 'MENUITEMS.SAMPLEVIDEOS.LIST.CREATE',
+                link: '/operating-regions/create-new-sv',
+                parentId: 88
+            },
+        ]
+    },
+    {
+        id: 1010,
+        icon: 'bx-list-ul',
+        label: 'MENUITEMS.TRAINERS.TEXT',
+        subItems: [
+            {
+                id: 89,
+                label: 'MENUITEMS.TRAINERS.LIST.SHOW',
+                link: '/operating-regions/trainers',
+                parentId: 88
+            },
+            {
+                id: 89,
+                label: 'MENUITEMS.TRAINERS.LIST.CREATE',
+                link: '/operating-regions/create-new-trainer',
+                parentId: 88
+            },
+        ]
+    },
+    {
+        id: 1010,
+        icon: 'bx-list-ul',
+        label: 'MENUITEMS.ORDERS.TEXT',
+        subItems: [
+            {
+                id: 89,
+                label: 'MENUITEMS.ORDERS.LIST.BASIC',
+                link: '/orders',
+                parentId: 88
+            },
+        ]
+    },
     /*{
         id: 91,
         icon: 'bxs-bar-chart-alt-2',

@@ -27,9 +27,9 @@ export class AssignExerciseComponent implements OnInit {
   ngOnInit() {
     this.breadCrumbItems = [{ label: 'Customers' }, { label: 'All Customers', active: true }];
 
-    this.spservice.getAllExercises().subscribe(resp => {
-      this.sps = resp.data
-    })
+    // this.spservice.getAllExercises().subscribe(resp => {
+    //   this.existingExercises = resp.data
+    // })
     
     this.spservice.getAllWP().subscribe(resp => {
       this.wps = resp.data
@@ -40,7 +40,8 @@ export class AssignExerciseComponent implements OnInit {
 
   getAssignedExercised()
   {
-    this.spservice.getAssignedExercise(this.wpid).subscribe( resp => {
+    this.existingExercises = null;
+    this.spservice.getAllWPExercises(this.wpid).subscribe( resp => {
       if(resp.success)
         this.existingExercises = resp.data;
         
@@ -50,37 +51,41 @@ export class AssignExerciseComponent implements OnInit {
 
   }
 
-  ifexists(id)
-  {
-    let x = this.existingExercises.indexOf(id);
-    if(x < 0)
-      return false;
-    else 
-      return true;
-  }
+  // ifexists(id)
+  // {
+  //   let x = this.existingExercises.indexOf(id);
+  //   if(x < 0)
+  //     return false;
+  //   else 
+  //     return true;
+  // }
 
   assign(event, eid)
   {
     // console.log(event);
     // console.log(eid);
-
-    if(event.target.checked)
+    if(this.wpid)
     {
-
-      this.spservice.postAssignExercise(this.wpid, eid).subscribe( resp => {
-        
-      }, err=>{ 
-        
+      if(event.target.checked)
+      {
+        this.ajax(eid);      
+      }
+      else 
+      {
+        this.spservice.postUnAssignExercise(this.wpid, eid).subscribe( resp => {
+          
+        }, err=>{ 
+          
+        });
+      }
+    }
+    else {
+      Swal.fire({
+        title: 'Error',
+        html: 'Select Workout Program'
       });
     }
-    else 
-    {
-      this.spservice.postUnAssignExercise(this.wpid, eid).subscribe( resp => {
-        
-      }, err=>{ 
-        
-      });
-    }
+
   }
 
   /*edit(id)
@@ -118,4 +123,50 @@ export class AssignExerciseComponent implements OnInit {
       }
     });
   }*/
+
+  ajax(eid) {
+    Swal.fire({
+      title: 'Enter Position',
+      input: 'number',
+      showCancelButton: true,
+      confirmButtonText: 'Submit',
+      showLoaderOnConfirm: true,
+      confirmButtonColor: '#556ee6',
+      cancelButtonColor: '#f46a6a',
+      preConfirm: position => {
+        // eslint-disable-next-line no-unused-vars
+        /*return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            if (email === 'taken@example.com') {
+              Promise.reject(new Error('This email is already taken.'));
+            } else {
+              resolve();
+            }
+          }, 2000);
+        });*/
+        if (position > 0)
+        {
+          this.spservice.postAssignExercise(this.wpid, eid,position).subscribe( resp => {
+          
+          }, err=>{ 
+            
+          });
+        }
+        else {
+          Swal.fire({
+            title: 'Error',
+            html: 'Enter position something bigger than zero'
+          });
+
+        }
+      },
+      allowOutsideClick: false
+    }).then(position => {
+      console.log(position);
+      Swal.fire({
+        title: 'Assigned!',
+        html: 'Saved'
+      });
+    });
+  }
 }

@@ -1,11 +1,11 @@
 <div class="container-fluid">
-  <app-page-title title="Basic Tables" [breadcrumbItems]="breadCrumbItems"></app-page-title>
+  <app-page-title title="Customers" [breadcrumbItems]="breadCrumbItems"></app-page-title>
   
   <div class="row">
     <div class="col-lg-12">
       <div class="card">
         <div class="card-body">
-          <h4 class="card-title">Subscription Plans</h4>
+          <h4 class="card-title">All Customers</h4>
           <p class="card-title-desc">
               <!-- <ngb-alert role="alert" class="alert alert-primary alert-dismissible" ng-reflect-type="primary">
                 A simple primary alert—check it out!
@@ -21,6 +21,8 @@
                   <th>Email</th>
                   <th>Phone</th>
                   <th>Active Status</th>
+                  <th>Documents</th>
+                  <th>Diet-Exercise</th>
                   <th>Actions</th>
                 </tr>
               </thead>
@@ -30,8 +32,12 @@
                   <td>{{sp.name}}</td>
                   <td>{{sp.email}}</td>
                   <td>{{sp.phone}}</td>
+                  
                   <td><span *ngIf="sp.active_status" class="badge badge-success">Active</span>
                     <span *ngIf="sp.active_status != 1" class="badge badge-danger ml-1">Inactive</span></td>
+                  
+                    <td><a [routerLink]="['/documents', sp.id]">View Documents</a></td>
+                    <td><a [routerLink]="['/diet-exercise', sp.id]">View Diet-Exercise</a></td>
                   <td> <a [routerLink]="" (click)="edit(sp.id)">Edit</a> | <a [routerLink]="" (click)="delete(sp.id)">Delete</a></td>
                 </tr>
                 

@@ -1,0 +1,58 @@
+<div class="modal-header">
+  <h5 class="modal-title mt-0">Edit Operating Region</h5>
+  <button type="button" class="close" aria-hidden="true" (click)="closeModal(0)">×</button>
+</div>
+<div class="modal-body">
+<form (ngSubmit)="submit()" [formGroup]="typeValidationForm">
+  <div class="form-group">
+    <label>State</label>
+    <select class="form-control" formControlName="state_id" [ngClass]="{'is-invalid': typesubmit && type.state_id.errors}">
+      <option *ngFor="let item of states" value={{item.id}}>{{ item.name }}</option>
+    </select>
+    <div *ngIf="typesubmit && type.state_id.errors" class="invalid-feedback">
+      <span *ngIf="type.state_id.errors.required">This value is required.</span>
+    </div>
+  </div>
+
+
+  <div class="form-group">
+    <label>City</label>
+    <select class="form-control" formControlName="city_id" [ngClass]="{'is-invalid': typesubmit && type.city_id.errors}">
+      <option *ngFor="let item of cities" value={{item.id}}>{{ item.name }}</option>
+    </select>
+    <div *ngIf="typesubmit && type.city_id.errors" class="invalid-feedback">
+      <span *ngIf="type.city_id.errors.required">This value is required.</span>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Pincode</label>
+    <input type="text" class="form-control" formControlName="pincode"
+      [ngClass]="{'is-invalid': typesubmit && type.pincode.errors}" placeholder="Enter plan pincode" />
+    <div *ngIf="typesubmit && type.pincode.errors" class="invalid-feedback">
+      <span *ngIf="type.pincode.errors.required">This value is required.</span>
+      <span *ngIf="type.pincode.errors.pattern">Invalid pincode.</span>
+      <span *ngIf="type.pincode.errors.minLength">Invalid pincode.</span>
+      <span *ngIf="type.pincode.errors.maxLength">Invalid pincode.</span>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label>Active Status</label>
+    <select formControlName="active_status" class="form-control" [ngClass]="{'is-invalid': typesubmit && type.active_status.errors}">
+      <option value="">Select Active Status</option>
+      <option value="1">Active</option>
+      <option value="0">Inactive</option>
+    </select>
+    <div *ngIf="typesubmit && type.active_status.errors" class="invalid-feedback">
+      <span *ngIf="type.active_status.errors.required">This value is required.</span>
+    </div>
+  </div>  
+  <span *ngIf="error">{{errorMessage}}</span>
+</form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-light" (click)="closeModal(0)">Close</button>
+  <button type="button" class="btn btn-primary" (click)="submit()" [disabled]="loading">
+    <i class="bx bx-hourglass bx-spin font-size-16 align-middle mr-2" *ngIf="loading"></i>Save changes</button>
+</div>

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup, NgForm } from '@angular/forms';
 import { CustomerService } from '../customer.service';
 import { MustMatch } from './create-workout.mustmatch';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-create-workout',
@@ -34,14 +35,14 @@ export class CreateWorkoutComponent implements OnInit {
      * Type validation form
      */
     this.typeValidationForm = this.formBuilder.group({
-      title: ['', [Validators.required]],
+      title: ['', [Validators.required, Validators.pattern('[a-zA-Z-_ ]+')]],
       description: ['',[Validators.required]],
       level: ['',[Validators.required]],
       focus_area: ['', [Validators.required]],
       duration: ['', [Validators.required, Validators.pattern('[0-9]+')]],
       active_status: ['1', [Validators.required]],
-      image: ['', Validators.required],
-      calories: [''],
+      image: [''],
+      calories: ['', [Validators.pattern('[0-9]+')]],
     });
 
 
@@ -56,9 +57,13 @@ export class CreateWorkoutComponent implements OnInit {
     return this.typeValidationForm.controls;
   }
 
-  fileToUpload
+  fileToUpload = null;
   imagePath
   imgURL
+  loading = false;
+  error = false;
+  errorMessage = "";
+
   handleFileInput(files: FileList) {
     this.fileToUpload = files.item(0);
     console.log(this.fileToUpload);
@@ -71,14 +76,12 @@ export class CreateWorkoutComponent implements OnInit {
     }
 
   }
-
   /**
    * Type validation form submit data
    */
-  typeSubmit() {
+  typeSubmit(wpform) {
     this.typesubmit = true;
     
-
     if(this.typeValidationForm.invalid)
     {
       return;
@@ -93,12 +96,57 @@ export class CreateWorkoutComponent implements OnInit {
       calories: this.type.calories.value,
       active_status: this.type.active_status.value,
     }
+    this.loading = true;
+    if(this.fileToUpload != null)
+    {
 
-    this.spservice.postWorkout(this.fileToUpload, data).subscribe( resp => {
-      console.log("resp", resp)
-    }, err=>{ 
-      console.log("err", err)
-    });
+      this.spservice.postWorkout(this.fileToUpload, data).subscribe( resp => {
+        console.log("resp", resp)
+        this.typesubmit = false;
+        wpform.reset();
+        this.successmsg();
+        this.loading = false;
+        this.error = false;
+        this.errorMessage = "";
+
+      }, err=>{ 
+        console.log("err", err)
+        this.loading = false;
+        this.error = true;
+        this.errorMessage = "Something went wrong. Unable to save";
+
+        if(err.success == false)
+        {
+          // if(err.error.title)
+          //   this.errorMessage = err.error.title[0];
+          // else if(err.error.title)
+          // this.errorMessage = err.error.title[0];
+
+        }
+
+      });
+    }
+    else {
+      this.spservice.postWorkoutWOImage(data).subscribe( resp => {
+        console.log("resp", resp)
+        this.successmsg();
+        wpform.reset();
+        this.typesubmit = false;
+        this.loading = false;
+        this.error = false;
+        this.errorMessage = "";
+
+      }, err=>{ 
+        console.log("err", err)
+        this.loading = false;
+        this.error = true;
+        this.errorMessage = "Something went wrong. Unable to save";
+      });
+    }
+  }
+
+  successmsg() {
+    Swal.fire('Good job!', 'Saved!', 'success');
   }
     
 }

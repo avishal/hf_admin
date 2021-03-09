@@ -35,19 +35,21 @@
                   <th>#</th>
                   <th>Image</th>
                   <th>Title</th>
+                  <th>Position</th>
                   <th>Level</th>
                   <!-- <th>Active Status</th> -->
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let sp of sps; let i = index">
+                <tr *ngFor="let sp of existingExercises; let i = index">
                   <!-- <th scope="row">{{i + 1}}</th> -->
                   <th scope="row">
 
-                    <input type="checkbox" (change)="assign($event, sp.id)" [checked]="ifexists(sp.id)"/>
+                    <input type="checkbox" (change)="assign($event, sp.id)" [checked]="sp.selected"/>
                   </th>
                   <td><img class="img-thumbnail" alt="200x200" width="200" [src]="sp.small_image_url" data-holder-rendered="true"></td>
                   <td>{{sp.title}}</td>
+                  <td>{{sp.position}}</td>
                   <td>{{sp.level}}</td>
                 </tr>
                 

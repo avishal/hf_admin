@@ -269,6 +269,47 @@
         "CREATENEW": "Create new Exercise"
       }
     },
+    "ASSIGNEXERCISE": {
+      "TEXT": "Assign Exercise",
+      "LIST": {
+        "BASIC": "Assign Exercise"
+      }
+    },
+    "OPERATIONREGIONS": {
+      "TEXT": "Operating Regions",
+      "LIST": {
+        "SHOW": "List",
+        "CREATE": "Create New"
+      }
+    },
+    "TRAINERS": {
+      "TEXT": "Trainers",
+      "LIST": {
+        "SHOW": "List",
+        "CREATE": "Create New"
+      }
+    },
+    "LIVEVIDEOS": {
+      "TEXT": "Live Videos",
+      "LIST": {
+        "SHOW": "List",
+        "CREATE": "Create New"
+      }
+    },
+    "SAMPLEVIDEOS": {
+      "TEXT": "Sample Videos",
+      "LIST": {
+        "SHOW": "List",
+        "CREATE": "Create New"
+      }
+    },
+    "PROMOVIDEO": {
+      "TEXT": "Promotional Video",
+      "LIST": {
+        "SHOW": "View"
+      }
+    },
+    
     "ORDERS": {
       "TEXT": "Customers Orders",
       "LIST": {

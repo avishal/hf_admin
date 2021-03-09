@@ -14,13 +14,14 @@
           <p class="card-title-desc">
             Create new exercise
           </p>
-          <form (ngSubmit)="typeSubmit()" [formGroup]="typeValidationForm">
+          <form #exForm (ngSubmit)="typeSubmit(exForm)" [formGroup]="typeValidationForm">
             <div class="form-group">
               <label>Title</label>
               <input type="text" class="form-control" formControlName="title"
                 [ngClass]="{'is-invalid': typesubmit && type.title.errors}" placeholder="Enter title" />
               <div *ngIf="typesubmit && type.title.errors" class="invalid-feedback">
                 <span *ngIf="type.title.errors.required">This value is required.</span>
+                <span *ngIf="type.title.errors.pattern">This value should contain alphabets only.</span>
               </div>
             </div>
             
@@ -30,6 +31,7 @@
                 [ngClass]="{'is-invalid': typesubmit && type.sub_title.errors}" placeholder="Enter sub title" />
               <div *ngIf="typesubmit && type.sub_title.errors" class="invalid-feedback">
                 <span *ngIf="type.sub_title.errors.required">This value is required.</span>
+                
               </div>
             </div>
 
@@ -147,6 +149,8 @@
                 <span *ngIf="type.active_status.errors.required">This value is required.</span>
               </div>
             </div>
+
+            <span *ngIf="error">{{errorMessage}}</span>
 
             <div class="form-group mb-0">
               <div>
