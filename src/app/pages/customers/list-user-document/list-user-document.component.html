@@ -1,6 +1,5 @@
 <div class="container-fluid">
   <app-page-title title="Customer Documents" [breadcrumbItems]="breadCrumbItems"></app-page-title>
-  
   <a routerLink="/customers" class="btn btn-primary"> &lt; Go Back </a>
   <div class="row">
     <div class="col-lg-12">
@@ -32,13 +31,12 @@
                 <tr *ngFor="let ud of userDocs; let i = index">
                   <th scope="row">{{i + 1}}</th>
                   <td>{{ud.type}}</td>
-                  <td>{{ud.filepath}}</td>
+                  <td><img class="img-thumbnail" alt="200x200" width="200" [src]="ud.small_image_url" data-holder-rendered="true"></td>
                   <td>{{ud.verified}}</td>
                   <td><span *ngIf="ud.active_status" class="badge badge-success">Active</span>
                     <span *ngIf="ud.active_status != 1" class="badge badge-danger ml-1">Inactive</span></td>
                   <td> <a [routerLink]="" (click)="edit(ud.id)">Edit</a> | <a [routerLink]="" (click)="delete(ud.id)">Delete</a></td>
                 </tr>
-                
               </tbody>
             </table>
           </div>

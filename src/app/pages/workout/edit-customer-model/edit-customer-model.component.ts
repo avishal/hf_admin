@@ -21,7 +21,7 @@ export class EditCustomerModelComponent implements OnInit {
   sps = {};
   public Editor = ClassicEditor;
   id;
-  constructor(public formBuilder: FormBuilder, 
+  constructor(public formBuilder: FormBuilder,
     private spservice:CustomerService,public activeModal: NgbActiveModal) { }
   typeValidationForm: FormGroup; // type validation form
   typesubmit: boolean;
@@ -32,7 +32,7 @@ export class EditCustomerModelComponent implements OnInit {
   workoutData:any = {};
 
   ngOnInit() {
-    
+
     this.typeValidationForm = this.formBuilder.group({
       title: ['', [Validators.required, Validators.pattern('[a-zA-Z-_ ]+')]],
       description: ['',[Validators.required]],
@@ -41,11 +41,11 @@ export class EditCustomerModelComponent implements OnInit {
       duration: ['', [Validators.required, Validators.pattern('[0-9]+')]],
       active_status: ['1', [Validators.required]],
       image: [''],
-      calories: [''],
+      calories: ['', [Validators.required, Validators.pattern('[0-9]+')]],
     });
 
     this.breadCrumbItems = [{ label: 'Customers' }, { label: 'All Customers', active: true }];
-    
+
     this.typesubmit = false;
 
     this.getWorkout();
@@ -59,9 +59,9 @@ export class EditCustomerModelComponent implements OnInit {
 
     var reader = new FileReader();
     this.imagePath = files;
-    reader.readAsDataURL(files[0]); 
-    reader.onload = (_event) => { 
-      this.imgURL = reader.result; 
+    reader.readAsDataURL(files[0]);
+    reader.onload = (_event) => {
+      this.imgURL = reader.result;
     }
 
   }
@@ -87,8 +87,8 @@ export class EditCustomerModelComponent implements OnInit {
       // this.type.image.setValue(this.workoutData.image)
       this.imgURL = this.workoutData.small_image_url;
       this.type.calories.setValue(this.workoutData.calories)
-      
-    }, err=>{ 
+
+    }, err=>{
       this.loading = false;
       this.error = true;
       this.errorMessage = "Something went wrong. Unable to get workout";
@@ -100,13 +100,13 @@ export class EditCustomerModelComponent implements OnInit {
   submit(wpeditform)
   {
     this.typesubmit = true;
-    
-    
+
+
     if(this.typeValidationForm.invalid)
     {
       return false;
     }
-    
+
     this.loading = true;
     this.error = false;
     this.errorMessage = "";
@@ -120,13 +120,11 @@ export class EditCustomerModelComponent implements OnInit {
       calories: this.type.calories.value,
       active_status: this.type.active_status.value,
     }
-    
+
     if(this.fileToUpload != null)
     {
-
-    
     this.spservice.postUpdateWorkout(this.id, this.fileToUpload, data).subscribe( resp => {
-      
+
       this.loading = false;
       this.error = false;
       this.errorMessage = ""
@@ -136,27 +134,27 @@ export class EditCustomerModelComponent implements OnInit {
       this.activeModal.close(this.id);
       this.successmsg();
 
-    }, err=>{ 
+    }, err=>{
       this.loading = false;
       this.error = true;
       this.errorMessage = "Something went wrong.";
       console.log("err", err)
     });
   }
-  else 
+  else
   {
     this.spservice.postUpdateWorkoutWOImage(this.id, data).subscribe( resp => {
-      
+
       this.loading = false;
       this.error = false;
       this.errorMessage = ""
 
       this.typesubmit = false;
       wpeditform.reset();
-      
+
       this.activeModal.close(this.id);
       this.successmsg();
-    }, err=>{ 
+    }, err=>{
       this.loading = false;
       this.error = true;
       this.errorMessage = "Something went wrong.";
@@ -164,7 +162,6 @@ export class EditCustomerModelComponent implements OnInit {
     });
   }
   }
-  
   closeModal(id)
   {
     // this.passEntry.emit(this.id);

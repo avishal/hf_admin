@@ -10,9 +10,10 @@
         [ngClass]="{'is-invalid': typesubmit && type.title.errors}" placeholder="Enter plan title" />
       <div *ngIf="typesubmit && type.title.errors" class="invalid-feedback">
         <span *ngIf="type.title.errors.required">This value is required.</span>
+        <span *ngIf="type.title.errors.pattern">Enter only characters.</span>
       </div>
     </div>
-    
+
     <div class="form-group">
       <label>Description</label>
       <div>
