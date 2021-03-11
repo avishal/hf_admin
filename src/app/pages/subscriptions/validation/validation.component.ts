@@ -26,6 +26,8 @@ export class ValidationComponent implements OnInit {
   // Form submition
   typesubmit: boolean;
 
+  calculatedAmount = 0;
+
   ngOnInit() {
 
     this.breadCrumbItems = [{ label: 'Subscriptions' }, { label: 'Create new', active: true }];
@@ -42,6 +44,7 @@ export class ValidationComponent implements OnInit {
       price: ['100', [Validators.required, Validators.pattern('[0-9]+')]],
       discount: ['0', [Validators.required, Validators.pattern('[0-9]+')]],
       tax: ['0', [Validators.required, Validators.pattern('[0-9]+')]],
+      shipping: ['0', [Validators.required, Validators.pattern('[0-9]+')]],
       duration: ['10', [Validators.required, Validators.pattern('[0-9]+')]],
       active_status: ['1', [Validators.required]],
     });
@@ -71,6 +74,7 @@ export class ValidationComponent implements OnInit {
       price: this.type.price.value,
       discount: this.type.discount.value,
       tax: this.type.tax.value,
+      shipping: this.type.shipping.value,
       duration: this.type.duration.value,
       active_status: this.type.active_status.value,
 
@@ -88,8 +92,14 @@ export class ValidationComponent implements OnInit {
       console.log("err", err)});
     }
     finalPrice = 0;
-    calculateTax()
+    calculateAmount()
     {
+
+      let subtotal = parseFloat(this.type.price.value) - parseFloat(this.type.discount.value);
+
+      let tax = subtotal * (parseFloat(this.type.tax.value)/100);
+      
+      this.calculatedAmount = subtotal + tax + parseFloat(this.type.shipping.value);
       
     }
 }

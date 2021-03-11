@@ -5,6 +5,54 @@
     <div class="col-lg-12">
       <div class="card">
         <div class="card-body">
+          <h4 class="card-title">New Manual Payment Orders</h4>
+          <p class="card-title-desc">
+              <!-- <ngb-alert role="alert" class="alert alert-primary alert-dismissible" ng-reflect-type="primary">
+                A simple primary alert—check it out!
+                <button type="button" class="close" aria-label="Close"><span aria-hidden="true">×</span></button>
+              </ngb-alert> -->
+          </p>
+          <div class="table-responsive">
+            <table class="table mb-0">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Customer Name /Email/Phone</th>
+                  <th>Plan Name</th>
+                  <th>Order Date</th>
+                  <th>Order number</th>
+                  <th>Payment Details / Amount</th>
+                  <th>Image</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let sp of non_complete_manual_orders; let i = index">
+                  <th scope="row">{{i + 1}}</th>
+                  <td>{{ (sp.user != null) ? (sp.user.name) : ""}} | {{sp.user != null ? sp.user.email: ""}} | {{sp.user != null ? sp.user.phone:""}}</td>
+                  <td>{{ (sp.subscription != null) ? (sp.subscription.title) : ""}}</td>
+                  <td>{{ sp.order.order_date | date }}</td>
+                  <td>{{sp.order.order_no }}</td>
+                  <td>{{sp.paymentid}} | {{sp.price | currency:"INR"}}</td>
+                  <td><img class="rounded avatar-lg" src="{{sp.image_small}}" (click)="openLargeImage(sp.image_large)"/></td>
+                  <td><span class="badge badge-danger">{{ sp.status }}</span></td>
+                  <td> <a [routerLink]="" (click)="verify(sp.id)"> Verify</a></td>
+                </tr>
+                
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-body">
           <h4 class="card-title">New Orders / Pending Orders</h4>
           <p class="card-title-desc">
               <!-- <ngb-alert role="alert" class="alert alert-primary alert-dismissible" ng-reflect-type="primary">

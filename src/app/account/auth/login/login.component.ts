@@ -35,8 +35,8 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
-      email: ['admin@vpace.com', [Validators.required, Validators.email]],
-      password: ['admin@vpace.com', [Validators.required]],
+      email: ['admin@test.com', [Validators.required, Validators.email]],
+      password: ['test', [Validators.required]],
     });
 
     // reset login status
@@ -74,8 +74,13 @@ export class LoginComponent implements OnInit, AfterViewInit {
           .pipe(first())
           .subscribe(
             data => {
-              console.log("data", data);
-              this.router.navigate(['/dashboard']);
+              // console.log("data", data);
+              if(data.user != null)
+                this.router.navigate(['/dashboard']);
+              else {
+
+                this.error = data.message;
+              }
             },
             error => {
               this.error = error ? error : '';

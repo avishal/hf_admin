@@ -316,6 +316,30 @@
         "BASIC": "All Orders"
       }
     },
+    "ADMINMESSAGE": {
+      "TEXT": "Admin Message",
+      "LIST": {
+        "BASIC": "Send Message"
+      }
+    },
+    "PAYINST": {
+      "TEXT": "Manual Payment Instruction",
+      "LIST": {
+        "BASIC": "Add/Update Message"
+      }
+    },
+    "SUPPORT": {
+      "TEXT": "Support",
+      "LIST": {
+        "BASIC": "Add/Update Support details"
+      }
+    },
+    "GEN": {
+      "TEXT": "General Diet Exercise",
+      "LIST": {
+        "BASIC": "Update General Diet Exercise"
+      }
+    },
     "CHARTS": {
       "TEXT": "Charts",
       "LIST": {

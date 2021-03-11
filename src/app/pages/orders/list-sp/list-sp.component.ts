@@ -5,6 +5,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EditCustomerModelComponent } from '../edit-customer-model/edit-customer-model.component';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { VerifyManualOrderModelComponent } from '../verify-manual-order-model/verify-manual-order-model.component';
+import { ImgModelComponent } from '../img-model/img-model.component';
 
 @Component({
   selector: 'app-list-sp',
@@ -19,6 +21,7 @@ export class ListSpComponent implements OnInit {
   // bread crumb items
   breadCrumbItems: Array<{}>;
   sps = {};
+  non_complete_manual_orders = {};
   non_complete_orders = {};
   non_pending_orders = {};
 
@@ -27,6 +30,7 @@ export class ListSpComponent implements OnInit {
   ngOnInit() {
     this.breadCrumbItems = [{ label: 'Orders' }, { label: 'All Orders', active: true }];
     // this.getAllOrders();
+    this.getAllManualNonCompleteOrders();
     this.getAllNonCompleteOrders();
     this.getAllNonPendingOrders();
   }
@@ -39,6 +43,13 @@ export class ListSpComponent implements OnInit {
     })
   }
 
+  getAllManualNonCompleteOrders()
+  {
+    this.spservice.getAllManualNonCompleteOrders().subscribe(resp => {
+      // console.log(resp);
+      this.non_complete_manual_orders = resp.data
+    })
+  }
   getAllNonCompleteOrders()
   {
     this.spservice.getAllNonCompleteOrders().subscribe(resp => {
@@ -63,6 +74,22 @@ export class ListSpComponent implements OnInit {
     modalRef.result.then((receivedEntry) => {
       this.getAllOrders();
     })
+  }
+  verify(id)
+  {
+    // this.modalService.open(EditCustomerModelComponent, {size: 'lg',windowClass:'modal-holder', centered: true });
+    const modalRef = this.modalService.open(VerifyManualOrderModelComponent, {size: 'lg', backdrop : 'static', keyboard: false });
+    modalRef.componentInstance.id = id;
+    modalRef.result.then((receivedEntry) => {
+      this.getAllManualNonCompleteOrders();
+      this.getAllOrders();
+    })
+  }
+  openLargeImage(imgpath)
+  {
+    // this.modalService.open(EditCustomerModelComponent, {size: 'lg',windowClass:'modal-holder', centered: true });
+    const modalRef = this.modalService.open(ImgModelComponent, {size: 'lg', backdrop : 'static', keyboard: false });
+    modalRef.componentInstance.imgpath = imgpath;
   }
   invoice(id)
   {

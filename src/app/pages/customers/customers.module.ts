@@ -19,11 +19,15 @@ import { ListUserDocumentComponent } from './list-user-document/list-user-docume
 import { EditCustomerModelComponent } from './edit-customer-model/edit-customer-model.component';
 import { EditCustomerDocumentModelComponent } from './edit-customer-document-model/edit-customer-document-model.component';
 import { AddEditDietExerciseComponent } from './add-edit-diet-exercise/add-edit-diet-exercise.component';
+import { GeneralDietExerciseComponent } from './general-diet-exercise/general-diet-exercise.component';
+import { AdminMessageComponent } from './admin-message/admin-message.component';
+import { ManualPayInstructionComponent } from './manual-pay-instruction/manual-pay-instruction.component';
+import { AdminSupportComponent } from './admin-support/admin-support.component';
 import { CustomerService } from './customer.service';
 
 @NgModule({
   // tslint:disable-next-line: max-line-length
-  declarations: [ListSpComponent ,ValidationComponent,EditCustomerModelComponent,ListUserDocumentComponent, EditCustomerDocumentModelComponent, AddEditDietExerciseComponent],
+  declarations: [ListSpComponent ,ValidationComponent,EditCustomerModelComponent,ListUserDocumentComponent, EditCustomerDocumentModelComponent, AddEditDietExerciseComponent, AdminMessageComponent, ManualPayInstructionComponent, AdminSupportComponent,GeneralDietExerciseComponent],
   imports: [
     CommonModule,
     FormsModule,

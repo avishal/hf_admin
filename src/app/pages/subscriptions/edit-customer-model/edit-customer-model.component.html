@@ -33,7 +33,7 @@
     </div>
     <div class="form-group">
       <label>Price</label>
-      <input type="text" class="form-control" formControlName="price"
+      <input type="text" class="form-control" formControlName="price" (keyup)="calculateAmount()"
         [ngClass]="{'is-invalid': typesubmit && type.price.errors}" placeholder="Enter plan cost" />
       <div *ngIf="typesubmit && type.price.errors" class="invalid-feedback">
         <span *ngIf="type.price.errors.required">This value is required.</span>
@@ -42,7 +42,7 @@
     </div>
     <div class="form-group">
       <label>Discount</label>
-      <input type="text" class="form-control" formControlName="discount"
+      <input type="text" class="form-control" formControlName="discount" (keyup)="calculateAmount()"
         [ngClass]="{'is-invalid': typesubmit && type.discount.errors}" placeholder="Enter discount amount" />
       <div *ngIf="typesubmit && type.discount.errors" class="invalid-feedback">
         <span *ngIf="type.discount.errors.required">This value is required.</span>
@@ -51,14 +51,23 @@
     </div>
     <div class="form-group">
       <label>Tax</label>
-      <input type="text" class="form-control" formControlName="tax"
+      <input type="text" class="form-control" formControlName="tax" (keyup)="calculateAmount()"
         [ngClass]="{'is-invalid': typesubmit && type.tax.errors}" placeholder="Enter tax amount" />
       <div *ngIf="typesubmit && type.tax.errors" class="invalid-feedback">
         <span *ngIf="type.tax.errors.required">This value is required.</span>
         <span *ngIf="type.tax.errors.pattern">This value should be number.</span>
       </div>
     </div>
-    Total Price: {{type.price.value}} - {{type.discount.value}} + {{type.tax.value}}% = {{type.price.value - type.discount.value + ((type.price.value - type.discount.value) * (type.tax.value/100))}}
+    <div class="form-group">
+      <label>Shipping</label>
+      <input type="text" class="form-control" formControlName="shipping" (keyup)="calculateAmount()"
+        [ngClass]="{'is-invalid': typesubmit && type.shipping.errors}" placeholder="Enter shipping amount" />
+      <div *ngIf="typesubmit && type.shipping.errors" class="invalid-feedback">
+        <span *ngIf="type.shipping.errors.required">This value is required.</span>
+        <span *ngIf="type.shipping.errors.pattern">This value should be number.</span>
+      </div>
+    </div>
+    Total Price: {{ calculatedAmount }}
     <div class="form-group">
       <label>Duration</label>
       <input type="text" class="form-control" formControlName="duration"

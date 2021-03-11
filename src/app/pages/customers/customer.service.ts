@@ -58,11 +58,38 @@ export class CustomerService {
     postDietExercise(user_id, data) {
         return this.http.post<any>(environment.api_base_url+`/api/add-diet-exercise/${user_id}`, data);
     }
+    postGeneralDietExercise(data) {
+        return this.http.post<any>(environment.api_base_url+`/api/update-general-diet-exercise`, data);
+    }
+    
+    postAdminMessage(data) {
+        return this.http.post<any>(environment.api_base_url+`/api/admin-message`, data);
+    }
 
     getDietExercise(id) {
         return this.http.get<any>(environment.api_base_url+`/api/get-diet-exercise/${id}`);
     }
+
+    getGeneralDietExercise() {
+        return this.http.get<any>(environment.api_base_url+`/api/general-diet-exercise`);
+    }
+
     getTrainers() {
         return this.http.get<any>(environment.api_base_url+`/api/trainers`);
+    }
+    getAdminMessage() {
+        return this.http.get<any>(environment.api_base_url+`/api/admin-message`);
+    }
+    getManualPayInst() {
+        return this.http.get<any>(environment.api_base_url+`/api/admin-instruction`);
+    }
+    postManualPayInst(data) {
+        return this.http.post<any>(environment.api_base_url+`/api/admin-instruction`, data);
+    }
+    getSupport() {
+        return this.http.get<any>(environment.api_base_url+`/api/admin-support`);
+    }
+    postSupport(data) {
+        return this.http.post<any>(environment.api_base_url+`/api/admin-support`, data);
     }
 }

@@ -16,12 +16,14 @@ import { FormRoutingModule } from './form-routing.module';
 import { ValidationComponent } from './validation/validation.component';
 import { ListSpComponent } from './list-sp/list-sp.component';
 import { EditCustomerModelComponent } from './edit-customer-model/edit-customer-model.component';
+import { VerifyManualOrderModelComponent } from './verify-manual-order-model/verify-manual-order-model.component';
+import { ImgModelComponent } from './img-model/img-model.component';
 import { OrderService } from './orders.service';
 import { DetailComponent } from './detail/detail.component';
 
 @NgModule({
   // tslint:disable-next-line: max-line-length
-  declarations: [ListSpComponent ,ValidationComponent,EditCustomerModelComponent, DetailComponent],
+  declarations: [ListSpComponent ,ValidationComponent,EditCustomerModelComponent, VerifyManualOrderModelComponent, DetailComponent, ImgModelComponent],
   imports: [
     CommonModule,
     FormsModule,

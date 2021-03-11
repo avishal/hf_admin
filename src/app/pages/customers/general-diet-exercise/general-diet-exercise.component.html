@@ -1,0 +1,68 @@
+<div class="container-fluid">
+
+  <!-- start page title -->
+
+
+
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Add General Diet</h4>
+          <form (ngSubmit)="typeSubmit()" [formGroup]="typeValidationForm">
+            <!-- <div class="form-group">
+              <label>Title</label>
+              <input type="text" class="form-control" formControlName="title"
+                [ngClass]="{'is-invalid': typesubmit && type.title.errors}" placeholder="Enter plan title" />
+              <div *ngIf="typesubmit && type.title.errors" class="invalid-feedback">
+                <span *ngIf="type.title.errors.required">This value is required.</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Sub Title</label>
+              <input type="text" class="form-control" formControlName="subtitle"
+                [ngClass]="{'is-invalid': typesubmit && type.subtitle.errors}" placeholder="Enter plan sub-title" />
+              <div *ngIf="typesubmit && type.subtitle.errors" class="invalid-feedback">
+                <span *ngIf="type.subtitle.errors.required">This value is required.</span>
+              </div>
+            </div> -->
+            
+            <div class="form-group">
+              <label>Diet Description</label>
+              <div>
+                <ckeditor [editor]="Editor" data="" formControlName="diet_description"></ckeditor>
+                <!-- <textarea formControlName="description" class="form-control" rows="5"
+                  [ngClass]="{'is-invalid': typesubmit && type.description.errors}"></textarea> -->
+                <div *ngIf="typesubmit && type.diet_description.errors" class="invalid-feedback">
+                  <span *ngIf="type.diet_description.errors.required">This value is required.</span>
+                </div>
+              </div>
+            </div>
+            <h4 class="card-title">Add General Exercise</h4>
+            <div class="form-group">
+              <label>Exercise Description</label>
+              <div>
+                <ckeditor [editor]="Editor" data="" formControlName="exercise_description"></ckeditor>
+                <!-- <textarea formControlName="description" class="form-control" rows="5"
+                  [ngClass]="{'is-invalid': typesubmit && type.description.errors}"></textarea> -->
+                <div *ngIf="typesubmit && type.exercise_description.errors" class="invalid-feedback">
+                  <span *ngIf="type.exercise_description.errors.required">This value is required.</span>
+                </div>
+              </div>
+            </div>            
+            <div class="form-group mb-0">
+              <div>
+                <button type="submit" class="btn btn-primary mr-1">
+                  Submit
+                </button>
+                <button type="reset" class="btn btn-secondary">
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -29,7 +29,7 @@ export class EditCustomerModelComponent implements OnInit {
   error = false;
   errorMessage = ""
   customerData:any = {};
-
+  calculatedAmount=0;
   ngOnInit() {
     
     this.typeValidationForm = this.formBuilder.group({
@@ -39,6 +39,7 @@ export class EditCustomerModelComponent implements OnInit {
       price: ['', [Validators.required, Validators.pattern('[0-9]+')]],
       discount: ['', [Validators.required, Validators.pattern('[0-9]+')]],
       tax: ['0', [Validators.required, Validators.pattern('[0-9]+')]],
+      shipping: ['0', [Validators.required, Validators.pattern('[0-9]+')]],
       duration: ['', [Validators.required, Validators.pattern('[0-9]+')]],
       active_status: ['', [Validators.required]],
     });
@@ -68,9 +69,10 @@ export class EditCustomerModelComponent implements OnInit {
       this.type.price.setValue(this.customerData.price)
       this.type.discount.setValue(this.customerData.discount)
       this.type.tax.setValue(this.customerData.tax)
+      this.type.shipping.setValue(this.customerData.shipping)
       this.type.duration.setValue(this.customerData.duration)
       this.type.active_status.setValue(this.customerData.active_status)
-      
+      this.calculateAmount();
     }, err=>{ 
       this.loading = false;
       this.error = true;
@@ -101,6 +103,7 @@ export class EditCustomerModelComponent implements OnInit {
       price: this.type.price.value,
       discount: this.type.discount.value,
       tax: this.type.tax.value,
+      shipping: this.type.shipping.value,
       duration: this.type.duration.value,
       active_status: this.type.active_status.value
     }
@@ -120,6 +123,18 @@ export class EditCustomerModelComponent implements OnInit {
     });
   }
   
+
+  calculateAmount()
+    {
+
+      let subtotal = parseFloat(this.type.price.value) - parseFloat(this.type.discount.value);
+
+      let tax = subtotal * (parseFloat(this.type.tax.value)/100);
+      
+      this.calculatedAmount = subtotal + tax + parseFloat(this.type.shipping.value);
+      
+    }
+
   closeModal(id)
   {
     // this.passEntry.emit(this.id);

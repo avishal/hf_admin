@@ -754,6 +754,58 @@ export const MENU: MenuItem[] = [
             },
         ]
     },
+    {
+        id: 1010,
+        icon: 'bx-list-ul',
+        label: 'MENUITEMS.ADMINMESSAGE.TEXT',
+        subItems: [
+            {
+                id: 89,
+                label: 'MENUITEMS.ADMINMESSAGE.LIST.BASIC',
+                link: '/admin-message',
+                parentId: 88
+            },
+        ]
+    },
+    {
+        id: 1010,
+        icon: 'bx-list-ul',
+        label: 'MENUITEMS.PAYINST.TEXT',
+        subItems: [
+            {
+                id: 89,
+                label: 'MENUITEMS.PAYINST.LIST.BASIC',
+                link: '/pay-instruction',
+                parentId: 88
+            },
+        ]
+    },
+    {
+        id: 1010,
+        icon: 'bx-list-ul',
+        label: 'MENUITEMS.SUPPORT.TEXT',
+        subItems: [
+            {
+                id: 89,
+                label: 'MENUITEMS.SUPPORT.LIST.BASIC',
+                link: '/support',
+                parentId: 88
+            },
+        ]
+    },
+    {
+        id: 1010,
+        icon: 'bx-list-ul',
+        label: 'MENUITEMS.GEN.TEXT',
+        subItems: [
+            {
+                id: 89,
+                label: 'MENUITEMS.GEN.LIST.BASIC',
+                link: '/gen-diet-exercise',
+                parentId: 88
+            },
+        ]
+    },
     /*{
         id: 91,
         icon: 'bxs-bar-chart-alt-2',

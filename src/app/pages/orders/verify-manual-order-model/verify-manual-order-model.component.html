@@ -1,0 +1,34 @@
+<div class="modal-header">
+  <h5 class="modal-title mt-0">Edit Customer Order Status</h5>
+  <button type="button" class="close" aria-hidden="true" (click)="closeModal(0)">×</button>
+</div>
+<div class="modal-body">
+<form (ngSubmit)="submit()" [formGroup]="typeValidationForm">
+  
+  <div class="form-group">
+    <label>Payment Number/Transaction Number</label>
+    <input type="text" formControlName="paymentnumber" class="form-control"/>
+    <div *ngIf="typesubmit && type.paymentnumber.errors" class="invalid-feedback">
+      <span *ngIf="type.paymentnumber.errors.required">This value is required.</span>
+    </div>
+  </div>  
+
+  <div class="form-group">
+    <label>Verification Status</label>
+    <select formControlName="status" class="form-control" [ngClass]="{'is-invalid': typesubmit && type.status.errors}">
+      <option value="">Select Verification Status</option>
+      <option value="0">Pending</option>
+      <option value="1">Verified</option>
+    </select>
+    <div *ngIf="typesubmit && type.status.errors" class="invalid-feedback">
+      <span *ngIf="type.status.errors.required">This value is required.</span>
+    </div>
+  </div>  
+  <span *ngIf="error">{{errorMessage}}</span>
+</form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-light" (click)="closeModal(0)">Close</button>
+  <button type="button" class="btn btn-primary" (click)="submit()" [disabled]="loading">
+    <i class="bx bx-hourglass bx-spin font-size-16 align-middle mr-2" *ngIf="loading"></i>Save changes</button>
+</div>

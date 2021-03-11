@@ -32,12 +32,20 @@ export class UserProfileService {
         return this.http.post<any>(environment.api_base_url+`/api/admin-login`, {email: email, password: password})
         .pipe(map(data => {
             // login successful if there's a jwt token in the response
-            if (data && data.user.token) {
+            if (data && data.role == "admin" && data.user.token) {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
+                let token = data.user.token.split("|")[1];
+                data.user.token = token;
+                data.user.role = data.role;
                 localStorage.setItem('currentUser', JSON.stringify(data.user));
                 this.currentUserSubject.next(data.user);
+                return data.user;
             }
-            return data.user;
+            else {
+                data.user = null;
+                data.message ="invalid user";
+                return data;
+            }
         }));
     }
 
@@ -48,9 +56,10 @@ export class UserProfileService {
         //     console.log(er);
         // });
 
-        return this.http.get<any>(environment.api_base_url+`/api/admin-logout`)
+        return this.http.get<any>(environment.api_base_url+`/api/logout`)
         .subscribe(map(user => {
             localStorage.removeItem('currentUser');
+            // console.log(this.currentUserSubject);
             this.currentUserSubject.next(null);
         }));
         // remove user from local storage to log user out

@@ -26,6 +26,9 @@ export class OrderService {
     getInvoice() {
         return this.http.get<any>(environment.api_base_url+`/api/invoice-pdf/1`);
     }
+    getAllManualNonCompleteOrders() {
+        return this.http.get<any>(environment.api_base_url+`/api/orders/manual-payments`);
+    }
     getAllNonCompleteOrders() {
         return this.http.get<any>(environment.api_base_url+`/api/orders/status/noncomplete`);
     }
@@ -42,6 +45,9 @@ export class OrderService {
     getOrder(id) {
         return this.http.get<any>(environment.api_base_url+`/api/order/${id}`);
     }
+    getUserSubscription(id) {
+        return this.http.get<any>(environment.api_base_url+`/api/user-subscription/${id}`);
+    }
     
     // postSP(data) {
     //     return this.http.post<any>(environment.api_base_url+`/api/sp`, data);
@@ -49,6 +55,10 @@ export class OrderService {
 
     postUpdateOrder(id, data) {
         return this.http.post<any>(environment.api_base_url+`/api/order-update/${id}`, data);
+    }
+
+    postUpdateOrderVerificationStatus(id, data) {
+        return this.http.post<any>(environment.api_base_url+`/api/user-subscription/${id}`, data);
     }
 
     postDeleteCustomer(id) {

@@ -1,0 +1,42 @@
+<div class="container-fluid">
+
+  <!-- start page title -->
+  <app-page-title title="Form Validation" [breadcrumbItems]="breadCrumbItems"></app-page-title>
+  <!-- end page title -->
+
+
+
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Add Manual Payment Instructions</h4>
+          <form (ngSubmit)="typeSubmit()" [formGroup]="typeValidationForm">
+            
+            
+            <div class="form-group">
+              <label>Instruction</label>
+              <div>
+                <ckeditor [editor]="Editor" data="" formControlName="description"></ckeditor>
+                <div *ngIf="typesubmit && type.description.errors" class="invalid-feedback">
+                  <span *ngIf="type.description.errors.required">This value is required.</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="form-group mb-0">
+              <div>
+                <button type="submit" class="btn btn-primary mr-1">
+                  Submit
+                </button>
+                <button type="reset" class="btn btn-secondary">
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
